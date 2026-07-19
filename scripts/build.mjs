@@ -15,7 +15,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const template = readFileSync(join(root, 'template.html'), 'utf8');
 const contentDir = join(root, 'content');
 
-const files = readdirSync(contentDir).filter(f => f.endsWith('.md'));
+const files = readdirSync(contentDir).filter(f => f.endsWith('.md') && f !== 'README.md');
 const content = {};
 for (const f of files) content[f.slice(0, -3)] = readFileSync(join(contentDir, f), 'utf8');
 
