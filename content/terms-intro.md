@@ -1,0 +1,1 @@
+<p class="lead rv">Every financing product has terms. Here are mine: direct fit, real adjacency, and the one gap I'd rather you hear from me.</p>

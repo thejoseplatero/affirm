@@ -1,0 +1,1 @@
+That's the whole philosophy in one interaction. Transparency isn't a compliance layer at Affirm, it's the conversion engine. Search should run on it too.

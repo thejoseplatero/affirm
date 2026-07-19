@@ -1,0 +1,1 @@
+<p class="lead rv">Every offer below already cleared. Hover to pause and inspect, exactly how offer rails should behave.</p>

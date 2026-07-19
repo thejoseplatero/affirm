@@ -1,0 +1,1 @@
+This page runs on your patterns: the checkout, the payment plan, the search. Because the fastest way to evaluate a <b>Director of Product for Shopping &amp; Offers</b> is to watch what they ship when nobody asked for slides.

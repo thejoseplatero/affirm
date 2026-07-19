@@ -1,0 +1,1 @@
+<p class="lead rv">Your JD calls agentic search your biggest bet. Here's the property I'd protect while building it: <b>honest relevance beats flattering noise.</b> Watch it run on the hardest query I could give it.</p>

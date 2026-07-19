@@ -1,0 +1,3 @@
+<h2 class="rv disp">Ready when you are. Pay at your own pace.</h2>
+    <p class="rv">Twenty-five minutes on the actual Shopping &amp; Offers portfolio: what's working, what isn't, and where I'd start. No prep required on your side. That's my down payment.</p>
+    <a class="pill rv" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Continue the conversation</a>

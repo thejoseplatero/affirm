@@ -1,0 +1,2 @@
+<p class="lead rv" style="margin-bottom:20px;">A Director hire is a big-ticket purchase. So I broke it into installments you can verify, the same way you'd never ask a customer to trust a lump sum.</p>
+        <p class="lead rv" style="margin-bottom:0;">Pick a horizon. Every line is a checkable deliverable, not a vibe. And the finish line is the part I mean most: <b>the goal is a portfolio that runs without me in every room.</b></p>
