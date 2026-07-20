@@ -71,6 +71,9 @@ t('rail panels scroll normally (no sticky covering long content)', !/\.panelD \{
 t('offer dock anchors to the bottom of the screen', /\.offerdock \{ position:fixed; bottom/.test(html));
 t('offer dock present and wired', /id="offerdock"/.test(html) && /offerdock\.addEventListener\('click', openOffers\)/.test(html));
 t('no auto-popup takeover (offers open on click only)', !/IntersectionObserver[\s\S]{0,120}osOpen/.test(html));
+t('delight: fly-to-cart wired with cart wiggle', /function flyToCart/.test(html) && /cartwiggle/.test(html));
+t('delight: dock nudges until first open, then goes quiet', /docknudge/.test(html) && /offerdock\.classList\.add\('quiet'\)/.test(html));
+t('delight: phone idle float + arc breathe, reduced-motion safe', /phonefloat/.test(html) && /arcbreathe/.test(html) && (html.match(/prefers-reduced-motion/g) || []).length >= 5);
 t('four dark panels (three rails + beyond-this-page)', (html.match(/class="panelD"/g) || []).length === 4);
 t('joseplatero.com promoted, not buried', /id="more"/.test(html) && /Watch the agents work/.test(html));
 t('letters from the field present (2+)', (html.match(/class="letter"/g) || []).length >= 2);

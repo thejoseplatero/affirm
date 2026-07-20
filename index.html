@@ -60,6 +60,19 @@
   .od-n { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); font-size:12px; font-weight:700;
           padding:2px 9px; border-radius:999px; }
   .offerdock .chev { transition:transform .4s var(--ease); }
+  /* delight: the dock nudges for attention until first opened */
+  .offerdock.in:not(.quiet) { animation:docknudge 7s ease-in-out infinite 3s; }
+  @keyframes docknudge { 0%,88%,100%{ transform:translate(-50%,0); } 91%{ transform:translate(-50%,-9px); } 94%{ transform:translate(-50%,0); } 97%{ transform:translate(-50%,-4px); } }
+  @media (prefers-reduced-motion:reduce){ .offerdock.in:not(.quiet) { animation:none; } }
+
+  /* delight: fly-to-cart + cart wiggle */
+  .flydot { position:fixed; z-index:80; width:16px; height:16px; border-radius:50%; background:var(--indigo);
+            box-shadow:0 4px 14px -2px rgba(74,74,244,.7); pointer-events:none;
+            transition:transform .7s cubic-bezier(.3,.7,.4,1), opacity .7s; }
+  .cartbtn.wiggle { animation:cartwiggle .55s var(--spring); }
+  @keyframes cartwiggle { 0%{ transform:rotate(0); } 30%{ transform:rotate(-11deg) scale(1.08); } 60%{ transform:rotate(8deg); } 100%{ transform:rotate(0); } }
+  .cartn.pop { animation:npop .45s var(--spring); }
+  @keyframes npop { 0%{ transform:scale(1); } 45%{ transform:scale(1.45); } 100%{ transform:scale(1); } }
 
   /* ---------- nav: dark glass pill floating over everything, like affirm.com's hero bar ---------- */
   nav { position:sticky; top:14px; z-index:20; padding:0 16px; }
@@ -151,6 +164,12 @@
   .ph-note { text-align:center; font-size:10.5px; color:rgba(255,255,255,.45); margin-top:12px; }
   @keyframes float { 0%,100%{ transform:translateY(0) rotate(var(--tilt,0deg)); } 50%{ transform:translateY(-13px) rotate(var(--tilt,0deg)); } }
   @media (max-width:880px){ .showcase::before { display:none; } }
+  /* delight: the phone breathes */
+  .phone { animation:phonefloat 8s ease-in-out infinite; }
+  @keyframes phonefloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-11px); } }
+  .ph-chip { animation:chipglow 5s ease-in-out infinite; }
+  @keyframes chipglow { 0%,100%{ box-shadow:0 0 0 0 rgba(168,169,252,0); } 50%{ box-shadow:0 0 22px -2px rgba(168,169,252,.55); } }
+  @media (prefers-reduced-motion:reduce){ .phone, .ph-chip { animation:none; } }
 
   /* ---------- sections ---------- */
   section { padding:84px 0; }
@@ -299,7 +318,12 @@
   .cites { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
   .cite { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
           color:#fff; font-size:12.5px; font-weight:600; padding:7px 13px; border-radius:999px; text-decoration:none;
-          transition:background .25s, transform .3s var(--spring); }
+          opacity:0; transition:background .25s, transform .3s var(--spring); }
+  .agres.show .cite { animation:citein .5s var(--spring) both; }
+  @keyframes citein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  .agres.show .cite:nth-child(1){ animation-delay:.55s } .agres.show .cite:nth-child(2){ animation-delay:.68s }
+  .agres.show .cite:nth-child(3){ animation-delay:.81s } .agres.show .cite:nth-child(4){ animation-delay:.94s }
+  @media (prefers-reduced-motion:reduce){ .cite { opacity:1; } .agres.show .cite { animation:none; } }
   .cite:hover { background:rgba(255,255,255,.2); transform:translateY(-2px); }
   .agnote { margin-top:16px; padding-top:14px; border-top:1px dashed rgba(255,255,255,.18); font-size:13px; color:rgba(255,255,255,.62); }
   .agnote b { color:rgba(255,255,255,.9); }
@@ -478,7 +502,10 @@
           border-radius:36px; max-width:1004px; margin:0 auto; padding:96px 32px 130px; text-align:center; overflow:hidden; color:#fff; }
   .band::before { content:""; position:absolute; left:50%; bottom:-960px; transform:translateX(-50%);
                   width:980px; height:980px; border-radius:50%; border:64px solid var(--indigo);
-                  box-shadow:0 0 140px rgba(74,74,244,.55), inset 0 0 90px rgba(74,74,244,.4); pointer-events:none; }
+                  box-shadow:0 0 140px rgba(74,74,244,.55), inset 0 0 90px rgba(74,74,244,.4); pointer-events:none;
+                  animation:arcbreathe 7s ease-in-out infinite; }
+  @keyframes arcbreathe { 0%,100%{ opacity:.85; } 50%{ opacity:1; } }
+  @media (prefers-reduced-motion:reduce){ .band::before { animation:none; } }
   .band .wrap { position:relative; z-index:1; }
   .band h2 { color:#fff; font-size:clamp(30px,4.6vw,48px); margin:0 auto; }
   .band p { color:rgba(255,255,255,.78); font-size:17.5px; max-width:52ch; margin:16px auto 0; }
@@ -1132,6 +1159,24 @@ function cartClose(){
 cartlay.addEventListener('click', e => { if (e.target.closest('[data-cclose]')) cartClose(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' && !cartlay.hidden) cartClose(); });
 document.getElementById('cartbtn').addEventListener('click', cartOpen);
+function flyToCart(fromEl){
+  if (reduced) return;
+  const cartBtn = document.getElementById('cartbtn');
+  const a = fromEl.getBoundingClientRect(), b = cartBtn.getBoundingClientRect();
+  const dot = document.createElement('span'); dot.className = 'flydot';
+  dot.style.left = (a.left + a.width/2 - 8) + 'px'; dot.style.top = (a.top + a.height/2 - 8) + 'px';
+  document.body.appendChild(dot);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    dot.style.transform = 'translate(' + (b.left + b.width/2 - (a.left + a.width/2)) + 'px,' +
+                          (b.top + b.height/2 - (a.top + a.height/2)) + 'px) scale(.35)';
+    dot.style.opacity = '0';
+  }));
+  setTimeout(()=>{
+    dot.remove();
+    cartBtn.classList.remove('wiggle'); void cartBtn.offsetWidth; cartBtn.classList.add('wiggle');
+    cartN.classList.remove('pop'); void cartN.offsetWidth; cartN.classList.add('pop');
+  }, 650);
+}
 document.querySelectorAll('.prod .add').forEach(btn => btn.addEventListener('click', ()=>{
   const p = btn.closest('.prod');
   if (!cart.some(i=>i.name === p.dataset.name)) {
@@ -1140,7 +1185,8 @@ document.querySelectorAll('.prod .add').forEach(btn => btn.addEventListener('cli
   }
   btn.textContent = 'Added'; btn.classList.add('added');
   setTimeout(()=>{ btn.textContent = 'Add to cart'; btn.classList.remove('added'); }, 1400);
-  cartOpen();
+  flyToCart(btn);
+  setTimeout(cartOpen, reduced ? 0 : 720);
 }));
 cartRender();
 
@@ -1177,7 +1223,7 @@ function osClose(){
 osheet.addEventListener('click', e => { if (e.target.closest('[data-close]')) osClose(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' && !osheet.hidden) osClose(); });
 document.getElementById('osnext').addEventListener('click', ()=>{ osIdx = (osIdx+1)%osSlides.length; osRender(); });
-const openOffers = e => { e.preventDefault(); osIdx = 0; osRender(); osOpen(); };
+const openOffers = e => { e.preventDefault(); offerdock.classList.add('quiet'); osIdx = 0; osRender(); osOpen(); };
 document.getElementById('offerbtn').addEventListener('click', openOffers);
 offerdock.addEventListener('click', openOffers);
 </script>
