@@ -245,6 +245,55 @@
   .chip .tag.i { background:var(--indigo-lightest); color:var(--indigo-dark); }
   .chip .tag.y { background:var(--warning-light); color:var(--warning-ink); }
 
+  /* ---------- offer sheet: the Uber Eats-style takeover ---------- */
+  .osheet { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .osheet[hidden] { display:none; }
+  .os-back { position:absolute; inset:0; background:rgba(8,8,20,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+             opacity:0; transition:opacity .4s; }
+  .osheet.open .os-back { opacity:1; }
+  .os-card { position:relative; width:min(420px,100%); max-height:min(86vh,720px); overflow:hidden; border-radius:28px;
+             background:#0e0e26; color:#fff; box-shadow:0 50px 120px -30px rgba(0,0,0,.7); display:flex; flex-direction:column;
+             transform:translateY(40px) scale(.97); opacity:0; transition:transform .55s var(--spring), opacity .45s; }
+  .osheet.open .os-card { transform:none; opacity:1; }
+  @media (prefers-reduced-motion:reduce){ .os-card { transition:none; } .os-back { transition:none; } }
+  .os-visual { position:relative; flex:none; height:240px; overflow:hidden;
+               background:radial-gradient(120% 100% at 50% 118%, rgba(74,74,244,.75), #14143a 70%); }
+  .os-ad { position:absolute; top:16px; left:20px; font-size:12px; font-weight:600; color:rgba(255,255,255,.6); letter-spacing:.04em; }
+  .os-close { position:absolute; top:12px; right:14px; z-index:2; width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
+              background:rgba(255,255,255,.14); color:#fff; display:flex; align-items:center; justify-content:center;
+              transition:background .25s; }
+  .os-close:hover { background:rgba(255,255,255,.28); }
+  .os-art { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .os-art .bigmark { font-family:Poppins,sans-serif; font-weight:800; font-size:96px; letter-spacing:-.04em; color:#fff;
+                     text-shadow:0 20px 60px rgba(0,0,0,.45); }
+  .os-art .bigmark i { font-style:normal; color:var(--indigo-light); }
+  .os-chiplet { position:absolute; background:rgba(255,255,255,.92); color:var(--indigo-dark); font-weight:700; font-size:12px;
+                padding:7px 14px; border-radius:999px; box-shadow:0 10px 26px -10px rgba(0,0,0,.5); animation:float 6s ease-in-out infinite; }
+  .os-chiplet.a { top:20%; left:9%; --tilt:-6deg; transform:rotate(-6deg); }
+  .os-chiplet.b { bottom:16%; right:8%; --tilt:5deg; transform:rotate(5deg); animation-delay:1s; }
+  .os-body { padding:22px 24px 24px; background:linear-gradient(180deg, #0e0e26, #131335); }
+  .os-brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14.5px; margin-bottom:14px; }
+  .os-avatar { width:34px; height:34px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; }
+  .os-slides { position:relative; }
+  .os-slide { display:none; }
+  .os-slide.on { display:block; animation:osin .45s var(--ease); }
+  @keyframes osin { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .os-slide.on { animation:none; } }
+  .os-tag { display:inline-block; background:var(--warning); color:#3d2a05; font-weight:800; font-size:12px; letter-spacing:.05em;
+            text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:12px; }
+  .os-slide h3 { font-family:Poppins,sans-serif; font-size:25px; font-weight:700; line-height:1.2; letter-spacing:-.015em; margin-bottom:10px; }
+  .os-slide p { font-size:14px; color:rgba(255,255,255,.72); }
+  .os-dash { border-top:2px dashed rgba(255,255,255,.22); margin:18px 0; }
+  .os-cta { display:flex; align-items:center; justify-content:center; width:100%; background:#fff; color:var(--ink); font-weight:700;
+            font-size:15.5px; padding:15px 20px; border-radius:14px; text-decoration:none; transition:transform .3s var(--spring), background .25s; }
+  .os-cta:hover { transform:translateY(-2px); background:var(--indigo-lightest); }
+  .os-foot { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+  .os-next { background:none; border:none; color:rgba(255,255,255,.75); font:600 13.5px Inter,sans-serif; cursor:pointer; padding:6px 2px; }
+  .os-next:hover { color:#fff; }
+  .os-dots { display:flex; gap:6px; }
+  .os-dots i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.3); transition:background .3s, transform .3s; }
+  .os-dots i.on { background:#fff; transform:scale(1.25); }
+
   /* ---------- full disclosure ---------- */
   .pillar-quote { font-family:Poppins,sans-serif; font-style:italic; font-weight:500; color:var(--indigo-dark); font-size:15px; margin-bottom:10px; }
   .breakdown { background:var(--neutral); border-radius:var(--r); padding:10px; }
@@ -527,6 +576,9 @@
     <span class="chip"><span class="tag g">Shipped</span>Multiple Freddie Awards</span>
     <span class="chip"><span class="tag y">No late fees</span>weekly status posted, arrows and all</span>
   </div>
+  <div class="wrap" style="margin-top:34px;">
+    <a class="pill rv" href="#offers" id="offerbtn">See today's offers</a>
+  </div>
 </section>
 
 <section id="terms">
@@ -628,6 +680,57 @@
 </div>
 <div class="disclaimer">Not affiliated with or endorsed by Affirm Holdings, Inc. A personal, unsolicited pitch for one specific application, built in Affirm's visual style as a gesture of care, not a claim of association. All product-style interfaces above are illustrative demos.</div>
 
+<div class="osheet" id="osheet" role="dialog" aria-modal="true" aria-label="Today's offers" hidden>
+  <div class="os-back" data-close></div>
+  <div class="os-card">
+    <div class="os-visual">
+      <span class="os-ad">Offer · 1 of 3</span>
+      <button class="os-close" data-close aria-label="Dismiss offers">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="os-art" aria-hidden="true">
+        <span class="bigmark" id="osmark">1<i>+</i>1</span>
+        <span class="os-chiplet a">Shopping &amp; Offers</span>
+        <span class="os-chiplet b">Only on this page</span>
+      </div>
+    </div>
+    <div class="os-body">
+      <div class="os-brand">
+        <span class="os-avatar">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <path d="M6 25 A14 14 0 0 1 34 25" fill="none" stroke="#4a4af4" stroke-width="4.5" stroke-linecap="round"/>
+            <text x="20" y="34" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="21" fill="#0a0a0a">J</text>
+          </svg>
+        </span>
+        Jose Platero
+      </div>
+      <div class="os-slides" id="osslides">
+        <div class="os-slide on" data-cta="Order now" data-mark="1&lt;i&gt;+&lt;/i&gt;1">
+          <span class="os-tag">BOGO</span>
+          <h3>Hire one Director, get a working design org included.</h3>
+          <p>One hire, two disciplines. The full digital design practice already reports through this role, and it ships.</p>
+        </div>
+        <div class="os-slide" data-cta="Claim offer" data-mark="0&lt;i&gt;%&lt;/i&gt;">
+          <span class="os-tag">0% APR</span>
+          <h3>Twenty-five minutes of straight answers. Zero interest required.</h3>
+          <p>A walkthrough of your actual Shopping and Offers portfolio: what's working, what isn't, where I'd start. No prep on your side, no deck on mine.</p>
+        </div>
+        <div class="os-slide" data-cta="Start the order" data-mark="30&lt;i&gt;d&lt;/i&gt;">
+          <span class="os-tag">Free delivery</span>
+          <h3>First clickable prototype delivered inside 30 days.</h3>
+          <p>No listening tour that ends in a readout. Something users can touch, in front of them, in month one.</p>
+        </div>
+      </div>
+      <div class="os-dash"></div>
+      <a class="os-cta" id="oscta" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Order now</a>
+      <div class="os-foot">
+        <button class="os-next" id="osnext">Next offer</button>
+        <span class="os-dots" id="osdots"><i class="on"></i><i></i><i></i></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -722,6 +825,46 @@ addEventListener('scroll', ()=>{ document.querySelectorAll('[data-count]:not([da
 
 /* marquees: duplicate content for seamless loop */
 ['mq1','mq2'].forEach(id => { const m = document.getElementById(id); m.innerHTML += m.innerHTML; });
+
+/* offer sheet: the Uber Eats-style takeover */
+const osheet = document.getElementById('osheet');
+const osSlides = [...document.querySelectorAll('.os-slide')];
+const osDots = [...document.querySelectorAll('#osdots i')];
+const osMark = document.getElementById('osmark');
+const osCta = document.getElementById('oscta');
+const osAd = document.querySelector('.os-ad');
+let osIdx = 0, osShown = false, osLastFocus = null;
+function osRender(){
+  osSlides.forEach((s,i)=>s.classList.toggle('on', i===osIdx));
+  osDots.forEach((d,i)=>d.classList.toggle('on', i===osIdx));
+  const s = osSlides[osIdx];
+  osMark.innerHTML = s.dataset.mark;
+  osCta.textContent = s.dataset.cta;
+  osAd.textContent = 'Offer · ' + (osIdx+1) + ' of ' + osSlides.length;
+}
+function osOpen(){
+  if (!osheet.hidden) return;
+  osLastFocus = document.activeElement;
+  osheet.hidden = false;
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>osheet.classList.add('open')));
+  osheet.querySelector('.os-close').focus();
+}
+function osClose(){
+  osheet.classList.remove('open');
+  document.body.style.overflow = '';
+  const done = ()=>{ osheet.hidden = true; if (osLastFocus) osLastFocus.focus(); };
+  reduced ? done() : setTimeout(done, 300);
+}
+osheet.addEventListener('click', e => { if (e.target.closest('[data-close]')) osClose(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !osheet.hidden) osClose(); });
+document.getElementById('osnext').addEventListener('click', ()=>{ osIdx = (osIdx+1)%osSlides.length; osRender(); });
+document.getElementById('offerbtn').addEventListener('click', e => { e.preventDefault(); osShown = true; osIdx = 0; osRender(); osOpen(); });
+/* drop the takeover once, the first time the offers rail comes into view */
+const oio = new IntersectionObserver(es=>es.forEach(e=>{
+  if (e.isIntersecting && !osShown) { osShown = true; setTimeout(osOpen, 700); oio.disconnect(); }
+}),{threshold:.25});
+oio.observe(document.getElementById('offers'));
 </script>
 </body>
 </html>

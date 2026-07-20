@@ -57,10 +57,22 @@ section('css integrity');
     for (const ch of raw) { if (ch === '{') d++; if (ch === '}') d--; }
   }
   t('no orphaned top-level declarations', orphans.length === 0, orphans.join(' | '));
-  for (const rule of ['.hero {', '.stats {', '.checkout {', '.breakdown {', 'nav {']) {
+  for (const rule of ['.hero {', '.stats {', '.checkout {', '.breakdown {', 'nav {', '.phone {', '.cats {', '.osheet {', '.catcard {']) {
     t(`rule present: ${rule.slice(0, -2)}`, css.includes(rule));
   }
 }
+
+/* ---------- shopping experience ---------- */
+section('shopping experience');
+t('dark hero present (indigo gradient)', /\.hero \{[^}]*#0c0c24/.test(html));
+t('phone checkout module in hero', /class="phone"/.test(html) && /0% ego option/.test(html));
+t('four category cards in hero', (html.match(/class="catcard cc\d"/g) || []).length === 4);
+t('six shop-by-category tiles', (html.match(/class="cat t\d"/g) || []).length === 6);
+t('category tiles link to real sections', ['#record','#offers','#search','#demo','#terms'].every(h => new RegExp(`class="cat t\\d" href="${h}"`).test(html)));
+t('offer sheet dialog present', /id="osheet" role="dialog" aria-modal="true"/.test(html));
+t('offer sheet has 3 slides', (html.match(/class="os-slide[" ]/g) || []).length === 3);
+t('offer sheet starts hidden', /aria-label="Today's offers" hidden/.test(html));
+t('offer trigger button present', /id="offerbtn"/.test(html));
 
 /* ---------- accessibility ---------- */
 section('accessibility');
