@@ -149,6 +149,26 @@
   .lead { color:var(--dim); font-size:16.5px; max-width:58ch; margin-bottom:38px; }
   .lead b { color:var(--ink-80); }
 
+  /* ---------- shop by category ---------- */
+  .cats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:880px){ .cats { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .cats { grid-template-columns:1fr; } }
+  .cat { position:relative; display:block; text-decoration:none; border-radius:20px; padding:26px 24px 22px; overflow:hidden;
+         border:1px solid var(--border); transition:transform .35s var(--spring), box-shadow .35s; }
+  .cat:hover { transform:translateY(-5px); box-shadow:0 24px 50px -24px rgba(33,33,137,.35); }
+  .cat h3 { font-family:Poppins,sans-serif; font-size:19px; font-weight:600; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+  .cat p { font-size:13.5px; color:var(--ink-80); max-width:30ch; }
+  .cat .go { position:absolute; right:18px; bottom:16px; width:34px; height:34px; border-radius:50%; background:#fff; color:var(--indigo);
+             display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -10px rgba(33,33,137,.4);
+             transition:transform .35s var(--spring); }
+  .cat:hover .go { transform:translateX(4px); }
+  .cat.t1 { background:linear-gradient(135deg, var(--indigo-lightest), #f4f4ff); }
+  .cat.t2 { background:linear-gradient(135deg, var(--success-light), #f2fcf6); }
+  .cat.t3 { background:linear-gradient(135deg, var(--warning-light), #fffaf0); }
+  .cat.t4 { background:linear-gradient(135deg, var(--neutral-2), #fafcfd); }
+  .cat.t5 { background:linear-gradient(135deg, var(--cream), #faf7f1); }
+  .cat.t6 { background:linear-gradient(135deg, #fdeef3, #fef7fa); }
+
   /* ---------- demo 01: the plan picker ---------- */
   .demo1 { display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; }
   @media (max-width:880px){ .demo1 { grid-template-columns:1fr; gap:34px; } }
@@ -362,6 +382,17 @@
   </div>
 </header>
 
+<section id="browse">
+  <div class="wrap">
+    <div class="eyebrow rv">Shop by category</div>
+    <h2 class="rv"><!--content:cats-h2--></h2>
+    <p class="lead rv"><!--content:cats-lead--></p>
+    <div class="cats rv">
+      <!--content:cats-->
+    </div>
+  </div>
+</section>
+
 <section id="demo">
   <div class="wrap">
     <div class="eyebrow rv">The demo · 01</div>
@@ -411,7 +442,7 @@
   </div>
 </section>
 
-<section class="offers-sec">
+<section class="offers-sec" id="offers">
   <div class="wrap">
     <div class="eyebrow rv">The demo · 03</div>
     <h2 class="rv">Offers with a track record.</h2>
@@ -436,7 +467,7 @@
   </div>
 </section>
 
-<section>
+<section id="record">
   <div class="wrap">
     <div class="eyebrow rv">The record</div>
     <h2 class="rv">Numbers you can check.</h2>
