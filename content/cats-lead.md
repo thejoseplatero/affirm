@@ -1,1 +1,0 @@
-Your shop has categories. So does a career. Six aisles, every one stocked with things that already shipped.

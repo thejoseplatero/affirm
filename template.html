@@ -44,6 +44,30 @@
     .lane{animation:none!important}
   }
 
+  /* ---------- top offer banner: drops in, chevron reveals detail ---------- */
+  .topoffer { background:#0c0c24; padding:14px 16px 4px; overflow:hidden; }
+  .topoffer.gone { display:none; }
+  .to-card { max-width:680px; margin:0 auto; background:rgba(255,255,255,.97); border-radius:18px; color:var(--ink);
+             box-shadow:0 18px 50px -20px rgba(0,0,0,.6); transform:translateY(-130%); transition:transform .7s var(--spring); }
+  .topoffer.in .to-card { transform:none; }
+  @media (prefers-reduced-motion:reduce){ .to-card { transition:none; transform:none; } }
+  .to-main { display:flex; align-items:center; gap:14px; width:100%; padding:13px 18px; background:none; border:none;
+             cursor:pointer; font:inherit; text-align:left; }
+  .to-icon { flex:none; width:44px; height:30px; border-radius:6px; background:linear-gradient(135deg, var(--indigo-dark), var(--indigo));
+             display:flex; align-items:center; justify-content:center; }
+  .to-text { flex:1; font-size:14.5px; }
+  .to-main b { font-weight:700; }
+  .to-chev { flex:none; transition:transform .4s var(--ease); }
+  .to-main[aria-expanded="true"] .to-chev { transform:rotate(180deg); }
+  .to-x { position:absolute; top:-9px; right:-9px; width:26px; height:26px; border-radius:50%; border:none; cursor:pointer;
+          background:var(--ink); color:#fff; font-size:15px; line-height:1; display:flex; align-items:center; justify-content:center; }
+  .to-detail { max-height:0; overflow:hidden; transition:max-height .55s var(--ease); }
+  .to-detail.open { max-height:220px; }
+  .to-detail .inner { padding:4px 18px 18px 76px; }
+  .to-detail p { font-size:14px; color:var(--ink-80); margin-bottom:12px; max-width:52ch; }
+  .to-detail .pill.sm { background:var(--indigo); color:#fff; border-color:var(--indigo); }
+  @media (max-width:640px){ .to-detail .inner { padding-left:18px; } .to-text { font-size:13.5px; } }
+
   /* ---------- nav: dark glass pill floating over everything, like affirm.com's hero bar ---------- */
   nav { position:sticky; top:14px; z-index:20; padding:0 16px; }
   nav .in2 { max-width:1060px; margin:0 auto; padding:10px 12px 10px 24px; display:flex; justify-content:space-between; align-items:center;
@@ -68,10 +92,12 @@
   .pill.ghost:hover { color:var(--indigo); border-color:var(--indigo); background:transparent; box-shadow:none; }
   .pill.sm { padding:9px 20px; font-size:13.5px; }
   @media (max-width:520px){
-    nav .in2 { padding:0 18px; }
-    .brand { font-size:15px; }
+    nav .in2 { padding:8px 10px 8px 16px; }
+    .brand { display:none; }
+    .navbtns { align-items:center; }
     .navbtns .pill.ghost { display:none; }
     .pill.sm { padding:9px 16px; font-size:12.5px; }
+    .cartbtn { width:40px; height:40px; }
   }
 
   /* ---------- hero: dark shopping hero, modeled on affirm.com's homepage ---------- */
@@ -92,6 +118,9 @@
   .dek { font-size:18.5px; color:rgba(255,255,255,.78); max-width:52ch; margin-bottom:32px; }
   .dek b { color:#fff; }
   .heroctas { display:flex; gap:12px; flex-wrap:wrap; }
+  .proofstrip { display:flex; align-items:center; flex-wrap:wrap; gap:14px; margin-top:30px; font-size:13.5px; color:rgba(255,255,255,.65); }
+  .proofstrip b { color:#fff; font-weight:700; margin-right:4px; }
+  .proofstrip i { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.3); }
   .hero .pill { background:#fff; color:var(--indigo-dark); border-color:#fff; }
   .hero .pill:hover { background:var(--indigo-lightest); border-color:var(--indigo-lightest); box-shadow:0 14px 30px -12px rgba(0,0,0,.5); }
   .hero .pill.ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.5); }
@@ -149,25 +178,78 @@
   .lead { color:var(--dim); font-size:16.5px; max-width:58ch; margin-bottom:38px; }
   .lead b { color:var(--ink-80); }
 
-  /* ---------- shop by category ---------- */
-  .cats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  @media (max-width:880px){ .cats { grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:520px){ .cats { grid-template-columns:1fr; } }
-  .cat { position:relative; display:block; text-decoration:none; border-radius:20px; padding:26px 24px 22px; overflow:hidden;
-         border:1px solid var(--border); transition:transform .35s var(--spring), box-shadow .35s; }
-  .cat:hover { transform:translateY(-5px); box-shadow:0 24px 50px -24px rgba(33,33,137,.35); }
-  .cat h3 { font-family:Poppins,sans-serif; font-size:19px; font-weight:600; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
-  .cat p { font-size:13.5px; color:var(--ink-80); max-width:30ch; }
-  .cat .go { position:absolute; right:18px; bottom:16px; width:34px; height:34px; border-radius:50%; background:#fff; color:var(--indigo);
-             display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -10px rgba(33,33,137,.4);
-             transition:transform .35s var(--spring); }
-  .cat:hover .go { transform:translateX(4px); }
-  .cat.t1 { background:linear-gradient(135deg, var(--indigo-lightest), #f4f4ff); }
-  .cat.t2 { background:linear-gradient(135deg, var(--success-light), #f2fcf6); }
-  .cat.t3 { background:linear-gradient(135deg, var(--warning-light), #fffaf0); }
-  .cat.t4 { background:linear-gradient(135deg, var(--neutral-2), #fafcfd); }
-  .cat.t5 { background:linear-gradient(135deg, var(--cream), #faf7f1); }
-  .cat.t6 { background:linear-gradient(135deg, #fdeef3, #fef7fa); }
+  /* ---------- the shop: real product grid, Sephora-clean ---------- */
+  .shopbar { display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--border); border-radius:999px;
+             padding:14px 22px; max-width:560px; margin-bottom:34px; color:var(--dim); font-size:15px;
+             box-shadow:0 14px 36px -20px rgba(33,33,137,.18); }
+  .gridshop { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:960px){ .gridshop { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .gridshop { grid-template-columns:1fr; } }
+  .prod { background:#fff; border:1px solid var(--border); border-radius:20px; overflow:hidden; display:flex; flex-direction:column;
+          transition:transform .35s var(--spring), box-shadow .35s; }
+  .prod:hover { transform:translateY(-5px); box-shadow:0 26px 54px -26px rgba(33,33,137,.35); }
+  .p-img { position:relative; height:150px; display:flex; align-items:center; justify-content:center; }
+  .p-img.t1 { background:linear-gradient(135deg, var(--indigo-lightest), #f2f2ff); }
+  .p-img.t2 { background:linear-gradient(135deg, var(--success-light), #effbf4); }
+  .p-img.t3 { background:linear-gradient(135deg, var(--warning-light), #fff8ec); }
+  .p-img.t4 { background:linear-gradient(135deg, var(--neutral-2), #f6fafc); }
+  .p-img.t5 { background:linear-gradient(135deg, var(--cream), #f8f4ec); }
+  .p-img.t6 { background:linear-gradient(135deg, #fdeef3, #fdf5f8); }
+  .p-badge { position:absolute; top:12px; left:12px; background:#fff; color:var(--indigo-dark); font-weight:700; font-size:11px;
+             letter-spacing:.04em; text-transform:uppercase; padding:5px 10px; border-radius:999px;
+             box-shadow:0 6px 16px -8px rgba(33,33,137,.35); }
+  .p-body { display:flex; flex-direction:column; gap:7px; padding:16px 18px 18px; flex:1; }
+  .p-cat { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); }
+  .p-body h3 { font-family:Poppins,sans-serif; font-size:17px; font-weight:600; line-height:1.25; }
+  .p-stars { display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--ink-80); }
+  .p-stars svg { color:var(--warning); flex:none; }
+  .p-desc { font-size:13px; color:var(--ink-80); flex:1; }
+  .p-row { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px; }
+  .p-price { font-weight:700; font-size:14px; color:var(--indigo-dark); line-height:1.25; }
+  .add { flex:none; border:none; cursor:pointer; background:var(--indigo); color:#fff; font:600 13px Inter,sans-serif;
+         padding:10px 16px; border-radius:999px; transition:background .25s, transform .3s var(--spring); }
+  .add:hover { background:var(--indigo-mid); transform:translateY(-2px); }
+  .add.added { background:var(--success-dark); }
+
+  /* ---------- cart flyout drawer ---------- */
+  .cartbtn { position:relative; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px;
+             border-radius:50%; border:1.5px solid rgba(255,255,255,.45); background:transparent; color:#fff; cursor:pointer;
+             transition:border-color .25s, background .25s; }
+  .cartbtn:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+  .cartn { position:absolute; top:-4px; right:-4px; min-width:19px; height:19px; padding:0 5px; border-radius:999px;
+           background:var(--warning); color:#3d2a05; font-size:11px; font-weight:800; display:flex; align-items:center;
+           justify-content:center; transform:scale(0); transition:transform .35s var(--spring); }
+  .cartn.show { transform:scale(1); }
+  .cartlay { position:fixed; inset:0; z-index:70; }
+  .cartlay[hidden] { display:none; }
+  .cart-back { position:absolute; inset:0; background:rgba(8,8,20,.5); backdrop-filter:blur(4px); opacity:0; transition:opacity .35s; }
+  .cartlay.open .cart-back { opacity:1; }
+  .cart { position:absolute; top:0; right:0; bottom:0; width:min(400px,92vw); background:#fff; display:flex; flex-direction:column;
+          box-shadow:-30px 0 80px -30px rgba(0,0,0,.45); transform:translateX(105%); transition:transform .5s var(--spring); }
+  .cartlay.open .cart { transform:none; }
+  @media (prefers-reduced-motion:reduce){ .cart { transition:none; } .cart-back { transition:none; } }
+  .cart-head { display:flex; justify-content:space-between; align-items:center; padding:22px 24px 16px; border-bottom:1px solid var(--border); }
+  .cart-head h3 { font-family:Poppins,sans-serif; font-size:19px; font-weight:600; }
+  .cart-x { border:none; background:var(--neutral); width:34px; height:34px; border-radius:50%; cursor:pointer; color:var(--ink);
+            display:flex; align-items:center; justify-content:center; transition:background .25s; }
+  .cart-x:hover { background:var(--indigo-lightest); }
+  .cart-items { flex:1; overflow-y:auto; padding:8px 24px; }
+  .cart-empty { padding:36px 0; text-align:center; color:var(--dim); font-size:14px; }
+  .citem { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px dashed var(--border); }
+  .citem .sw { flex:none; width:42px; height:42px; border-radius:12px; }
+  .citem .nm { flex:1; }
+  .citem .nm b { display:block; font-size:14px; font-weight:600; }
+  .citem .nm span { font-size:12px; color:var(--indigo-dark); font-weight:600; }
+  .citem .rm { border:none; background:none; color:var(--dim); cursor:pointer; font-size:12.5px; text-decoration:underline; padding:4px; }
+  .citem .rm:hover { color:var(--ink); }
+  .cart-foot { padding:16px 24px 22px; border-top:1px solid var(--border); background:var(--neutral); }
+  .cart-plan { display:flex; align-items:center; gap:9px; font-size:12.5px; color:var(--ink-80); margin-bottom:12px; }
+  .cart-sub { display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:14px; }
+  .cart-sub b { font-weight:700; }
+  .cart-cta { display:flex; align-items:center; justify-content:center; width:100%; background:var(--indigo); color:#fff;
+              font-weight:700; font-size:15px; padding:15px 18px; border-radius:14px; text-decoration:none;
+              transition:background .25s, transform .3s var(--spring); }
+  .cart-cta:hover { background:var(--indigo-mid); transform:translateY(-2px); }
 
   /* ---------- demo 01: the plan picker ---------- */
   .demo1 { display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; }
@@ -246,14 +328,15 @@
   .chip .tag.y { background:var(--warning-light); color:var(--warning-ink); }
 
   /* ---------- offer sheet: the Uber Eats-style takeover ---------- */
-  .osheet { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .osheet { position:fixed; inset:0; z-index:60; display:flex; align-items:flex-end; justify-content:center; padding:20px; }
+  @media (min-width:700px){ .osheet { padding-bottom:36px; } }
   .osheet[hidden] { display:none; }
   .os-back { position:absolute; inset:0; background:rgba(8,8,20,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
              opacity:0; transition:opacity .4s; }
   .osheet.open .os-back { opacity:1; }
   .os-card { position:relative; width:min(420px,100%); max-height:min(86vh,720px); overflow:hidden; border-radius:28px;
              background:#0e0e26; color:#fff; box-shadow:0 50px 120px -30px rgba(0,0,0,.7); display:flex; flex-direction:column;
-             transform:translateY(40px) scale(.97); opacity:0; transition:transform .55s var(--spring), opacity .45s; }
+             transform:translateY(110%); opacity:0; transition:transform .6s var(--spring), opacity .4s; }
   .osheet.open .os-card { transform:none; opacity:1; }
   @media (prefers-reduced-motion:reduce){ .os-card { transition:none; } .os-back { transition:none; } }
   .os-visual { position:relative; flex:none; height:240px; overflow:hidden;
@@ -357,6 +440,25 @@
 </head>
 <body>
 
+<div class="topoffer" id="topoffer">
+  <div class="to-card" style="position:relative;">
+    <button class="to-x" id="tox" aria-label="Dismiss offer banner">&times;</button>
+    <button class="to-main" id="tomain" aria-expanded="false" aria-controls="todetail">
+      <span class="to-icon" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="20" height="20"><path d="M8 26 A12 12 0 0 1 32 26" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="to-text"><!--content:topoffer-main--></span>
+      <svg class="to-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="to-detail" id="todetail">
+      <div class="inner">
+        <p><!--content:topoffer-detail--></p>
+        <a class="pill sm" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Claim the 25 minutes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <nav id="nav"><div class="in2">
   <span class="logo" aria-label="Jose Platero">
     <svg class="jmark" viewBox="0 0 40 40" width="34" height="34" role="img" aria-hidden="true">
@@ -368,6 +470,10 @@
   <span class="navbtns">
     <a class="pill ghost sm" href="https://www.linkedin.com/in/joseplatero/" target="_blank" rel="noopener">LinkedIn</a>
     <a class="pill sm" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Start a conversation</a>
+    <button class="cartbtn" id="cartbtn" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h3l2.6 12.6a2 2 0 002 1.6h9.7a2 2 0 002-1.6L23 7H6.1"/></svg>
+      <span class="cartn" id="cartn">0</span>
+    </button>
   </span>
 </div></nav>
 
@@ -380,8 +486,14 @@
       </h1>
       <p class="dek rv"><!--content:hero-dek--></p>
       <div class="heroctas rv">
-        <a class="pill" href="#demo">See the demo</a>
-        <a class="pill ghost" href="#terms">Read the full terms</a>
+        <a class="pill" href="#shop">Start shopping</a>
+        <a class="pill ghost" href="#demo">See payment plans</a>
+      </div>
+      <div class="proofstrip rv">
+        <span><b>2&times;</b> active membership</span><i></i>
+        <span><b>9M+</b> members</span><i></i>
+        <span><b>45+</b> person org</span><i></i>
+        <span><b>15+</b> yrs shipping</span>
       </div>
     </div>
     <div class="showcase" id="collage" aria-hidden="true">
@@ -431,13 +543,17 @@
   </div>
 </header>
 
-<section id="browse">
+<section id="shop">
   <div class="wrap">
-    <div class="eyebrow rv">Shop by category</div>
-    <h2 class="rv"><!--content:cats-h2--></h2>
-    <p class="lead rv"><!--content:cats-lead--></p>
-    <div class="cats rv">
-      <!--content:cats-->
+    <div class="eyebrow rv">The shop</div>
+    <h2 class="rv"><!--content:shop-h2--></h2>
+    <p class="lead rv"><!--content:shop-lead--></p>
+    <div class="shopbar rv" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+      <span>director who has shipped shopping, offers, and search</span>
+    </div>
+    <div class="gridshop rv" id="gridshop">
+      <!--content:products-->
     </div>
   </div>
 </section>
@@ -552,6 +668,29 @@
   <a href="https://www.linkedin.com/in/joseplatero/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://joseplatero.com/" target="_blank" rel="noopener">joseplatero.com</a>
 </div>
 <div class="disclaimer">Not affiliated with or endorsed by Affirm Holdings, Inc. A personal, unsolicited pitch for one specific application, built in Affirm's visual style as a gesture of care, not a claim of association. All product-style interfaces above are illustrative demos.</div>
+
+<div class="cartlay" id="cartlay" role="dialog" aria-modal="true" aria-label="Your cart" hidden>
+  <div class="cart-back" data-cclose></div>
+  <aside class="cart">
+    <div class="cart-head">
+      <h3>Your cart</h3>
+      <button class="cart-x" data-cclose aria-label="Close cart">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartitems">
+      <div class="cart-empty" id="cartempty">Your cart is empty. Everything in the shop already shipped once, it ships again.</div>
+    </div>
+    <div class="cart-foot">
+      <div class="cart-plan">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="var(--success-dark)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Pay over time: 30, 90, and 365-day delivery plans included. $0 down, 0% ego.
+      </div>
+      <div class="cart-sub"><span>Subtotal</span><b>One Director, everything included</b></div>
+      <a class="cart-cta" id="cartcta" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Proceed to checkout</a>
+    </div>
+  </aside>
+</div>
 
 <div class="osheet" id="osheet" role="dialog" aria-modal="true" aria-label="Today's offers" hidden>
   <div class="os-back" data-close></div>
@@ -684,6 +823,65 @@ addEventListener('scroll', ()=>{ document.querySelectorAll('[data-count]:not([da
 
 /* marquees: duplicate content for seamless loop */
 ['mq1','mq2'].forEach(id => { const m = document.getElementById(id); m.innerHTML += m.innerHTML; });
+
+/* top offer banner: drop in, chevron reveals, x dismisses */
+const topoffer = document.getElementById('topoffer');
+const tomain = document.getElementById('tomain');
+const todetail = document.getElementById('todetail');
+setTimeout(()=>topoffer.classList.add('in'), reduced ? 0 : 600);
+tomain.addEventListener('click', ()=>{
+  const open = todetail.classList.toggle('open');
+  tomain.setAttribute('aria-expanded', open);
+});
+document.getElementById('tox').addEventListener('click', ()=>topoffer.classList.add('gone'));
+
+/* cart: add products, flyout drawer, checkout builds the email */
+const cartlay = document.getElementById('cartlay');
+const cartItemsEl = document.getElementById('cartitems');
+const cartEmpty = document.getElementById('cartempty');
+const cartN = document.getElementById('cartn');
+const cartCta = document.getElementById('cartcta');
+const CART_SUBJ = 'Affirm: Director, Product Management (Shopping %26 Offers)';
+let cart = [];
+function cartRender(){
+  cartN.textContent = cart.length;
+  cartN.classList.toggle('show', cart.length > 0);
+  cartEmpty.style.display = cart.length ? 'none' : '';
+  cartItemsEl.querySelectorAll('.citem').forEach(el=>el.remove());
+  const tints = {t1:'var(--indigo-lightest)', t2:'var(--success-light)', t3:'var(--warning-light)', t4:'var(--neutral-2)', t5:'var(--cream)', t6:'#fdeef3'};
+  cart.forEach((it,idx)=>{
+    const li = document.createElement('div'); li.className = 'citem';
+    li.innerHTML = '<span class="sw" style="background:'+tints[it.tint]+'"></span>' +
+      '<span class="nm"><b></b><span></span></span><button class="rm">Remove</button>';
+    li.querySelector('b').textContent = it.name;
+    li.querySelector('.nm span').textContent = it.price.replace(/&times;/g,'×');
+    li.querySelector('.rm').addEventListener('click', ()=>{ cart.splice(idx,1); cartRender(); });
+    cartItemsEl.appendChild(li);
+  });
+  const body = cart.length
+    ? encodeURIComponent('In the cart: ' + cart.map(i=>i.name).join(', ') + '.\n\nLet\'s talk about delivery.')
+    : '';
+  cartCta.href = 'mailto:joseplatero@gmail.com?subject=' + CART_SUBJ + (body ? '&body=' + body : '');
+}
+function cartOpen(){ cartlay.hidden = false; requestAnimationFrame(()=>requestAnimationFrame(()=>cartlay.classList.add('open'))); }
+function cartClose(){
+  cartlay.classList.remove('open');
+  reduced ? cartlay.hidden = true : setTimeout(()=>cartlay.hidden = true, 350);
+}
+cartlay.addEventListener('click', e => { if (e.target.closest('[data-cclose]')) cartClose(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !cartlay.hidden) cartClose(); });
+document.getElementById('cartbtn').addEventListener('click', cartOpen);
+document.querySelectorAll('.prod .add').forEach(btn => btn.addEventListener('click', ()=>{
+  const p = btn.closest('.prod');
+  if (!cart.some(i=>i.name === p.dataset.name)) {
+    cart.push({name: p.dataset.name, price: p.dataset.price, tint: p.dataset.tint});
+    cartRender();
+  }
+  btn.textContent = 'Added'; btn.classList.add('added');
+  setTimeout(()=>{ btn.textContent = 'Add to cart'; btn.classList.remove('added'); }, 1400);
+  cartOpen();
+}));
+cartRender();
 
 /* offer sheet: the Uber Eats-style takeover */
 const osheet = document.getElementById('osheet');

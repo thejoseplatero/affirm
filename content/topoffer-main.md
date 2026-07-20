@@ -1,0 +1,1 @@
+<b>New shopper offer:</b> 25 minutes on your actual Shopping &amp; Offers portfolio, 0% APR, no prep required
