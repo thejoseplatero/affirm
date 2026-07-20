@@ -40,44 +40,26 @@
   @media (prefers-reduced-motion:reduce){
     .rv{opacity:1!important;transform:none!important}
     .mask > span{transform:none!important}
-    .catcard{animation:none!important}
     .lane{animation:none!important}
   }
 
-  /* ---------- liquid-glass offer toast: flies over content, never pushes it ---------- */
-  .toast { position:fixed; top:84px; left:50%; z-index:45; width:min(680px, calc(100vw - 24px));
-           transform:translate(-50%,-190%); transition:transform .9s cubic-bezier(.3,1.45,.42,1); }
-  .toast.in { transform:translate(-50%,0); }
-  .toast.gone { display:none; }
-  .toast.in.mini { transform:translate(-50%,-190%); }
-  @media (prefers-reduced-motion:reduce){ .toast { transition:none; } }
-  .to-card { position:relative; border-radius:22px; color:var(--ink); overflow:hidden;
-             background:linear-gradient(160deg, rgba(255,255,255,.82), rgba(255,255,255,.58));
-             backdrop-filter:blur(26px) saturate(1.7); -webkit-backdrop-filter:blur(26px) saturate(1.7);
-             border:1px solid rgba(255,255,255,.85);
-             box-shadow:0 26px 70px -24px rgba(10,10,40,.65), inset 0 1px 0 rgba(255,255,255,.95),
-                        inset 0 -18px 34px -24px rgba(74,74,244,.22); }
-  .to-card::before { content:""; position:absolute; inset:-70% -20% auto; height:120%; pointer-events:none;
-                     background:radial-gradient(60% 90% at 30% 0%, rgba(255,255,255,.75), transparent 60%); }
-  .to-main { position:relative; display:flex; align-items:center; gap:14px; width:100%; padding:14px 20px; background:none; border:none;
-             cursor:pointer; font:inherit; text-align:left; }
-  .to-icon { flex:none; width:44px; height:30px; border-radius:7px; background:linear-gradient(135deg, var(--indigo-dark), var(--indigo));
-             display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px -6px rgba(33,33,137,.55); }
-  .to-text { flex:1; font-size:14.5px; }
-  .to-main b { font-weight:700; }
-  .to-chev { flex:none; transition:transform .45s var(--spring); }
-  .to-main[aria-expanded="true"] .to-chev { transform:rotate(180deg); }
-  .to-x { position:absolute; top:10px; right:-6px; transform:translateX(100%); width:26px; height:26px; border-radius:50%; border:none;
-          cursor:pointer; background:rgba(15,15,36,.85); color:#fff; font-size:15px; line-height:1;
-          display:flex; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
-  .toast .to-x { position:absolute; }
-  .to-detail { max-height:0; overflow:hidden; transition:max-height .6s var(--ease); }
-  .to-detail.open { max-height:240px; }
-  .to-detail .inner { padding:2px 20px 18px 78px; }
-  .to-detail p { font-size:14px; color:var(--ink-80); margin-bottom:12px; max-width:52ch; }
-  .to-detail .pill.sm { background:var(--indigo); color:#fff; border-color:var(--indigo); }
-  @media (max-width:640px){ .to-detail .inner { padding-left:20px; } .to-text { font-size:13.5px; }
-    .toast { top:78px; } .to-x { right:8px; transform:none; top:-9px; } }
+  /* ---------- offer dock: anchored to the bottom, click pops the offer sheet ---------- */
+  .offerdock { position:fixed; bottom:18px; left:50%; z-index:45; transform:translate(-50%,140%);
+               display:inline-flex; align-items:center; gap:10px; padding:13px 22px; border-radius:999px; border:none; cursor:pointer;
+               font:600 14px Inter,sans-serif; color:#fff; white-space:nowrap;
+               background:rgba(22,22,50,.78); backdrop-filter:blur(20px) saturate(1.5); -webkit-backdrop-filter:blur(20px) saturate(1.5);
+               box-shadow:0 20px 50px -18px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 1px rgba(168,169,252,.32);
+               transition:transform .7s var(--spring), box-shadow .3s; }
+  .offerdock.in { transform:translate(-50%,0); }
+  .offerdock:hover { box-shadow:0 24px 60px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(168,169,252,.6),
+                     0 0 34px -6px rgba(74,74,244,.55); }
+  .offerdock.gone { display:none; }
+  @media (prefers-reduced-motion:reduce){ .offerdock { transition:none; } }
+  .od-ic { display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+           background:var(--warning); color:#3d2a05; }
+  .od-n { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); font-size:12px; font-weight:700;
+          padding:2px 9px; border-radius:999px; }
+  .offerdock .chev { transition:transform .4s var(--ease); }
 
   /* ---------- nav: dark glass pill floating over everything, like affirm.com's hero bar ---------- */
   nav { position:sticky; top:14px; z-index:20; padding:0 16px; }
@@ -137,16 +119,15 @@
   .hero .pill.ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.5); }
   .hero .pill.ghost:hover { border-color:#fff; background:rgba(255,255,255,.08); box-shadow:none; }
 
-  /* phone checkout + floating glass category cards */
-  .showcase { position:relative; height:520px; }
-  @media (max-width:880px){ .showcase { height:auto; padding:12px 0 8px; } }
+  /* phone checkout: the single focal object of the hero */
+  .showcase { position:relative; display:flex; align-items:center; justify-content:center; min-height:500px; }
+  @media (max-width:880px){ .showcase { min-height:0; padding:16px 0 8px; } }
   .showcase::before { content:""; position:absolute; left:50%; top:50%; width:560px; height:560px; transform:translate(-50%,-50%);
                       background:radial-gradient(circle, rgba(74,74,244,.42), transparent 62%); pointer-events:none; }
-  .phone { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(340px,88%);
+  .phone { position:relative; width:min(350px,92%);
            background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.26); border-radius:36px;
            backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); padding:24px 22px 16px;
            box-shadow:0 50px 110px -34px rgba(0,0,0,.7), 0 0 90px -20px rgba(74,74,244,.5), inset 0 1px 0 rgba(255,255,255,.22); }
-  @media (max-width:880px){ .phone { position:relative; left:auto; top:auto; transform:none; margin:0 auto; } }
   .ph-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(168,169,252,.22); color:#dcdcfe;
              border:1px solid rgba(168,169,252,.35); font-weight:700; font-size:12.5px; padding:6px 13px; border-radius:999px; margin-bottom:16px; }
   .ph-plan { display:flex; align-items:baseline; gap:10px; margin-bottom:16px; }
@@ -168,22 +149,8 @@
   .ph-visual p { font-size:13px; color:rgba(255,255,255,.82); line-height:1.45; }
   .ph-visual p b { color:#fff; }
   .ph-note { text-align:center; font-size:10.5px; color:rgba(255,255,255,.45); margin-top:12px; }
-  .catcard { position:absolute; width:172px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
-             border-radius:18px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:18px 15px 13px;
-             font-size:11.5px; line-height:1.4; color:rgba(255,255,255,.78); opacity:.94;
-             box-shadow:0 22px 50px -22px rgba(0,0,0,.55); will-change:transform; animation:drift 9s ease-in-out infinite; }
-  .catcard b { color:#fff; font-weight:600; }
-  .catcard .cat-pill { position:absolute; top:-11px; left:13px; transform:rotate(-3deg); font-size:12px; padding:4px 12px; }
   @keyframes float { 0%,100%{ transform:translateY(0) rotate(var(--tilt,0deg)); } 50%{ transform:translateY(-13px) rotate(var(--tilt,0deg)); } }
-  @keyframes drift { 0%,100%{ transform:translate(0,0) rotate(var(--tilt,0deg)); }
-                     33%{ transform:translate(var(--dx,6px),-12px) rotate(var(--tilt,0deg)); }
-                     66%{ transform:translate(calc(var(--dx,6px)*-1),-5px) rotate(var(--tilt,0deg)); } }
-  .phone { z-index:2; }
-  .catcard { z-index:1; }
-  .cc1 { top:2%; left:-6%; --tilt:-6deg; --dx:7px; }
-  .cc2 { top:36%; right:-1%; --tilt:5deg; --dx:-8px; animation-delay:1.4s; }
-  .cc3 { bottom:-2%; left:-3%; --tilt:4deg; --dx:5px; animation-delay:2.6s; }
-  @media (max-width:880px){ .catcard { display:none; } .showcase::before { display:none; } }
+  @media (max-width:880px){ .showcase::before { display:none; } }
 
   /* ---------- sections ---------- */
   section { padding:84px 0; }
@@ -270,11 +237,11 @@
   /* ---------- sticky stacked dark panels (affirm.com's signature scroll) ---------- */
   .railshead { padding:84px 0 10px; }
   .stack { max-width:1060px; margin:0 auto; padding:0 28px 84px; }
-  .panelD { position:sticky; top:86px; margin-bottom:28px; border-radius:36px; padding:52px 54px 56px; overflow:hidden;
+  .panelD { margin-bottom:28px; border-radius:36px; padding:52px 54px 56px; overflow:hidden;
             background:linear-gradient(175deg, #12122e, #0c0c21 60%); border:1px solid rgba(168,169,252,.3); color:#fff;
             box-shadow:0 40px 90px -40px rgba(5,5,20,.9); }
   .panelD:last-child { margin-bottom:0; }
-  @media (max-width:760px){ .panelD { padding:34px 24px 40px; border-radius:26px; top:76px; } .stack { padding:0 16px 64px; } }
+  @media (max-width:760px){ .panelD { padding:34px 24px 40px; border-radius:26px; } .stack { padding:0 16px 64px; } }
   .ptag { display:inline-flex; align-items:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
           color:rgba(255,255,255,.85); font-weight:600; font-size:12.5px; padding:7px 15px; border-radius:999px; margin-bottom:22px;
           backdrop-filter:blur(8px); }
@@ -518,25 +485,6 @@
 </head>
 <body>
 
-<div class="toast" id="topoffer" role="region" aria-label="Current offer">
-  <button class="to-x" id="tox" aria-label="Dismiss offer banner">&times;</button>
-  <div class="to-card">
-    <button class="to-main" id="tomain" aria-expanded="false" aria-controls="todetail">
-      <span class="to-icon" aria-hidden="true">
-        <svg viewBox="0 0 40 40" width="20" height="20"><path d="M8 26 A12 12 0 0 1 32 26" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
-      </span>
-      <span class="to-text"><b>New shopper offer:</b> 25 minutes on your actual Shopping &amp; Offers portfolio, 0% APR, no prep required</span>
-      <svg class="to-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div class="to-detail" id="todetail">
-      <div class="inner">
-        <p>What's working, what isn't, and where I'd start. You bring the portfolio, I bring fifteen years of shipping loyalty and commerce at scale. If it's not useful, you've spent 25 minutes and owe nothing. That's the whole term sheet.</p>
-        <a class="pill sm" href="mailto:joseplatero@gmail.com?subject=Affirm: Director, Product Management (Shopping %26 Offers)">Claim the 25 minutes</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <nav id="nav"><div class="in2">
   <span class="logo" aria-label="Jose Platero">
     <svg class="jmark" viewBox="0 0 40 40" width="34" height="34" role="img" aria-hidden="true">
@@ -576,19 +524,7 @@
         <span><b>15+</b> yrs shipping</span>
       </div>
     </div>
-    <div class="showcase" id="collage" aria-hidden="true">
-      <div class="catcard cc1" data-depth="18">
-        <span class="cat-pill">Travel</span>
-<b>Aeroplan relaunch.</b> Membership 2&times;.
-      </div>
-      <div class="catcard cc2" data-depth="26">
-        <span class="cat-pill">AI-native</span>
-<b>Agents ship daily.</b> PRDs to plans.
-      </div>
-      <div class="catcard cc3" data-depth="14">
-        <span class="cat-pill">Offers</span>
-<b>Card offers in booking.</b> Net-new line.
-      </div>
+    <div class="showcase" aria-hidden="true">
       <div class="phone">
         <span class="ph-chip">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22 2 12V2h10l8.6 8.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r=".5"/></svg>
@@ -946,6 +882,15 @@
 </div>
 <div class="disclaimer">Not affiliated with or endorsed by Affirm Holdings, Inc. A personal, unsolicited pitch for one specific application, built in Affirm's visual style as a gesture of care, not a claim of association. All product-style interfaces above are illustrative demos.</div>
 
+<button class="offerdock" id="offerdock" aria-haspopup="dialog">
+  <span class="od-ic" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22 2 12V2h10l8.6 8.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r=".5"/></svg>
+  </span>
+  Today's offers
+  <span class="od-n">3</span>
+  <svg class="chev" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
 <div class="cartlay" id="cartlay" role="dialog" aria-modal="true" aria-label="Your cart" hidden>
   <div class="cart-back" data-cclose></div>
   <aside class="cart">
@@ -1030,20 +975,6 @@ function sweep(){ document.querySelectorAll('.rv:not(.in), h1:not(.in)').forEach
 addEventListener('scroll', sweep, {passive:true}); addEventListener('load', sweep); setTimeout(sweep, 350);
 
 addEventListener('scroll', ()=>{ document.getElementById('nav').classList.toggle('scrolled', scrollY > 12); }, {passive:true});
-
-/* hero collage parallax */
-const collage = document.getElementById('collage');
-if (collage && !reduced) {
-  const cards = [...collage.querySelectorAll('.catcard')];
-  addEventListener('mousemove', e => {
-    const cx = innerWidth/2, cy = innerHeight/2;
-    const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
-    cards.forEach(c => {
-      const d = +c.dataset.depth || 15;
-      c.style.marginLeft = (dx*d)+'px'; c.style.marginTop = (dy*d)+'px';
-    });
-  }, {passive:true});
-}
 
 /* plan picker */
 const planbar = document.getElementById('planbar');
@@ -1130,22 +1061,9 @@ addEventListener('scroll', ()=>{ document.querySelectorAll('[data-count]:not([da
 /* marquees: duplicate content for seamless loop */
 ['mq1','mq2'].forEach(id => { const m = document.getElementById(id); m.innerHTML += m.innerHTML; });
 
-/* liquid-glass offer toast: flies in on top, collapses politely on scroll */
-const topoffer = document.getElementById('topoffer');
-const tomain = document.getElementById('tomain');
-const todetail = document.getElementById('todetail');
-setTimeout(()=>topoffer.classList.add('in'), reduced ? 0 : 900);
-tomain.addEventListener('click', ()=>{
-  const open = todetail.classList.toggle('open');
-  tomain.setAttribute('aria-expanded', open);
-});
-document.getElementById('tox').addEventListener('click', ()=>topoffer.classList.add('gone'));
-addEventListener('scroll', ()=>{
-  topoffer.classList.toggle('mini', scrollY > 140);
-  if (scrollY > 140 && todetail.classList.contains('open')) {
-    todetail.classList.remove('open'); tomain.setAttribute('aria-expanded','false');
-  }
-}, {passive:true});
+/* offer dock: rises from the bottom, click pops the offer sheet */
+const offerdock = document.getElementById('offerdock');
+setTimeout(()=>offerdock.classList.add('in'), reduced ? 0 : 1200);
 
 /* cart: add products, flyout drawer, checkout builds the email */
 const cartlay = document.getElementById('cartlay');
@@ -1202,7 +1120,7 @@ const osDots = [...document.querySelectorAll('#osdots i')];
 const osMark = document.getElementById('osmark');
 const osCta = document.getElementById('oscta');
 const osAd = document.querySelector('.os-ad');
-let osIdx = 0, osShown = false, osLastFocus = null;
+let osIdx = 0, osLastFocus = null;
 function osRender(){
   osSlides.forEach((s,i)=>s.classList.toggle('on', i===osIdx));
   osDots.forEach((d,i)=>d.classList.toggle('on', i===osIdx));
@@ -1228,12 +1146,9 @@ function osClose(){
 osheet.addEventListener('click', e => { if (e.target.closest('[data-close]')) osClose(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' && !osheet.hidden) osClose(); });
 document.getElementById('osnext').addEventListener('click', ()=>{ osIdx = (osIdx+1)%osSlides.length; osRender(); });
-document.getElementById('offerbtn').addEventListener('click', e => { e.preventDefault(); osShown = true; osIdx = 0; osRender(); osOpen(); });
-/* drop the takeover once, the first time the offers rail comes into view */
-const oio = new IntersectionObserver(es=>es.forEach(e=>{
-  if (e.isIntersecting && !osShown) { osShown = true; setTimeout(osOpen, 700); oio.disconnect(); }
-}),{threshold:.25});
-oio.observe(document.getElementById('offers'));
+const openOffers = e => { e.preventDefault(); osIdx = 0; osRender(); osOpen(); };
+document.getElementById('offerbtn').addEventListener('click', openOffers);
+offerdock.addEventListener('click', openOffers);
 </script>
 </body>
 </html>

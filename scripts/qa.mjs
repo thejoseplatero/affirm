@@ -57,7 +57,7 @@ section('css integrity');
     for (const ch of raw) { if (ch === '{') d++; if (ch === '}') d--; }
   }
   t('no orphaned top-level declarations', orphans.length === 0, orphans.join(' | '));
-  for (const rule of ['.hero {', '.stats {', '.checkout {', '.breakdown {', 'nav {', '.phone {', '.gridshop {', '.osheet {', '.catcard {', '.cart {', '.toast {', '.panelD {', '.agq {']) {
+  for (const rule of ['.hero {', '.stats {', '.checkout {', '.breakdown {', 'nav {', '.phone {', '.gridshop {', '.osheet {', '.cart {', '.offerdock {', '.panelD {', '.agq {']) {
     t(`rule present: ${rule.slice(0, -2)}`, css.includes(rule));
   }
 }
@@ -66,19 +66,23 @@ section('css integrity');
 section('shopping experience');
 t('dark hero present (indigo gradient)', /\.hero \{[^}]*#0c0c24/.test(html));
 t('phone checkout module in hero', /class="phone"/.test(html) && /0% ego option/.test(html));
-t('three satellite cards orbit the focal phone', (html.match(/class="catcard cc\d"/g) || []).length === 3);
-t('three sticky stacked panels (affirm scroll signature)', (html.match(/class="panelD"/g) || []).length === 3);
+t('hero has a single focal object (no satellite clutter)', !/catcard/.test(html) && /class="phone"/.test(html));
+t('rail panels scroll normally (no sticky covering long content)', !/\.panelD \{[^}]*position:sticky/.test(html));
+t('offer dock anchors to the bottom of the screen', /\.offerdock \{ position:fixed; bottom/.test(html));
+t('offer dock present and wired', /id="offerdock"/.test(html) && /offerdock\.addEventListener\('click', openOffers\)/.test(html));
+t('no auto-popup takeover (offers open on click only)', !/IntersectionObserver[\s\S]{0,120}osOpen/.test(html));
+t('three dark rail panels', (html.match(/class="panelD"/g) || []).length === 3);
 t('panels carry affirm-style tag pills', ['At checkout','In the search bar','On the offer rails'].every(s => html.includes(`<span class="ptag">${s}</span>`)));
 t('agentic search: agent steps present', (html.match(/class="ags"/g) || []).length === 3);
 t('agentic search: answer cites the record', (html.match(/class="cite"/g) || []).length >= 3);
 t('agentic search: honest gap still disclosed (61%)', /data-n="61"/.test(html));
 t('growth thread: agentic insights chip in flight', /Agentic insights/.test(html));
-t('offer toast is fixed overlay (never pushes layout)', /\.toast \{ position:fixed/.test(html));
+
 t('six products in the shop', (html.match(/class="prod" data-name/g) || []).length === 6);
 t('every product has an add-to-cart button', (html.match(/class="add">Add to cart/g) || []).length === 6);
 t('cart drawer dialog present', /id="cartlay" role="dialog"/.test(html));
 t('cart button with count badge in nav', /id="cartbtn"/.test(html) && /id="cartn"/.test(html));
-t('top offer banner present with expandable detail', /id="topoffer"/.test(html) && /id="todetail"/.test(html) && /aria-expanded="false"/.test(html));
+
 t('hero sells with numbers (2x, 9M+, 45+)', /proofstrip/.test(html) && /9M\+/.test(html) && /45\+/.test(html));
 t('offer sheet dialog present', /id="osheet" role="dialog" aria-modal="true"/.test(html));
 t('offer sheet has 3 slides', (html.match(/class="os-slide[" ]/g) || []).length === 3);

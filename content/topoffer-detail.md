@@ -1,1 +1,0 @@
-What's working, what isn't, and where I'd start. You bring the portfolio, I bring fifteen years of shipping loyalty and commerce at scale. If it's not useful, you've spent 25 minutes and owe nothing. That's the whole term sheet.
