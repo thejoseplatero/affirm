@@ -448,6 +448,17 @@
   .recrow b { font-weight:700; color:#fff; }
   .recrow span:not(.y) { color:rgba(255,255,255,.72); }
 
+  /* ---------- beyond this page: joseplatero.com + letters ---------- */
+  .letters { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:38px; }
+  @media (max-width:760px){ .letters { grid-template-columns:1fr; } }
+  .letter { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); border-radius:20px; padding:24px 26px;
+            margin:0; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  .letter blockquote { margin:0; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.85); }
+  .letter blockquote::before { content:"\201C"; display:block; font-family:Poppins,sans-serif; font-size:38px; line-height:.6;
+            color:var(--indigo-light); margin-bottom:10px; }
+  .letter figcaption { margin-top:14px; font-size:12.5px; font-weight:600; color:rgba(255,255,255,.55); }
+  .letter figcaption b { color:rgba(255,255,255,.85); font-weight:700; }
+
   /* ---------- pillars: glass card on dark ---------- */
   .cream-sec { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:var(--r);
                max-width:1004px; margin:0 auto; padding:56px 44px; border-top-width:1px !important;
@@ -477,7 +488,7 @@
 
   .ratefoot { text-align:center; padding:56px 28px 8px; }
   .ratefoot .big { font-family:Poppins,sans-serif; font-size:44px; font-weight:700; letter-spacing:-.02em; color:#fff; line-height:1; }
-  .ratefoot .stars { color:var(--warning); font-size:17px; letter-spacing:3px; margin:8px 0 6px; }
+  .ratefoot .stars { color:var(--warning); font-size:30px; letter-spacing:6px; margin:0 0 12px; }
   .ratefoot p { font-size:13.5px; color:rgba(255,255,255,.55); max-width:44ch; margin:0 auto; }
   .ratefoot p b { color:rgba(255,255,255,.85); }
   .foot { text-align:center; padding:30px 0 14px; color:rgba(255,255,255,.5); font-size:13px; }
@@ -521,7 +532,7 @@
         <span><b>2&times;</b> active membership</span><i></i>
         <span><b>9M+</b> members</span><i></i>
         <span><b>45+</b> person org</span><i></i>
-        <span><b>15+</b> yrs shipping</span>
+        <span><b>Webby</b> Honoree</span>
       </div>
     </div>
     <div class="showcase" aria-hidden="true">
@@ -622,7 +633,7 @@
     </div>
     <div class="agsteps" id="agsteps" aria-hidden="true">
       <div class="ags"><span class="dot2"></span><b>Reading intent</b><span class="cap">growth, offers, trust: three constraints, parsed</span></div>
-      <div class="ags"><span class="dot2"></span><b>Scanning the record</b><span class="cap">6 shipped products, 15 years, 9M+ members</span></div>
+      <div class="ags"><span class="dot2"></span><b>Scanning the record</b><span class="cap">6 shipped products, 9M+ members, zero padding</span></div>
       <div class="ags"><span class="dot2"></span><b>Checking for gaps</b><span class="cap">1 found. Disclosing it, not hiding it</span></div>
     </div>
     <div class="agres" id="result">
@@ -671,6 +682,18 @@
   </div>
 </section>
 
+<div class="stack" id="more">
+  <div class="panelD">
+    <span class="ptag">Beyond this page</span>
+    <h2 class="rv">This page is the catalog. The store is live.</h2>
+    <p class="lead rv"><!--content:more-lead--></p>
+    <a class="pill rv" style="background:#fff; color:var(--indigo-dark); border-color:#fff;" href="https://joseplatero.com/" target="_blank" rel="noopener">Watch the agents work</a>
+    <div class="letters rv">
+      <!--content:letters-->
+    </div>
+  </div>
+</div>
+
 <section style="border-top:none; padding-top:0;">
   <div class="cream-sec">
     <h2 class="rv" style="text-align:center;"><!--content:pillars-h2--></h2>
@@ -688,7 +711,6 @@
 </div>
 
 <div class="ratefoot">
-  <div class="big">15 yrs</div>
   <div class="stars" aria-hidden="true">★★★★★</div>
   <p><b>Freddie Awards · Webby Honoree · 9M+ members shipped for.</b> Reviews available on request from the 45+ people who report through this role.</p>
 </div>

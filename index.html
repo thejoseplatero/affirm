@@ -448,6 +448,17 @@
   .recrow b { font-weight:700; color:#fff; }
   .recrow span:not(.y) { color:rgba(255,255,255,.72); }
 
+  /* ---------- beyond this page: joseplatero.com + letters ---------- */
+  .letters { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:38px; }
+  @media (max-width:760px){ .letters { grid-template-columns:1fr; } }
+  .letter { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); border-radius:20px; padding:24px 26px;
+            margin:0; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  .letter blockquote { margin:0; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.85); }
+  .letter blockquote::before { content:"\201C"; display:block; font-family:Poppins,sans-serif; font-size:38px; line-height:.6;
+            color:var(--indigo-light); margin-bottom:10px; }
+  .letter figcaption { margin-top:14px; font-size:12.5px; font-weight:600; color:rgba(255,255,255,.55); }
+  .letter figcaption b { color:rgba(255,255,255,.85); font-weight:700; }
+
   /* ---------- pillars: glass card on dark ---------- */
   .cream-sec { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:var(--r);
                max-width:1004px; margin:0 auto; padding:56px 44px; border-top-width:1px !important;
@@ -477,7 +488,7 @@
 
   .ratefoot { text-align:center; padding:56px 28px 8px; }
   .ratefoot .big { font-family:Poppins,sans-serif; font-size:44px; font-weight:700; letter-spacing:-.02em; color:#fff; line-height:1; }
-  .ratefoot .stars { color:var(--warning); font-size:17px; letter-spacing:3px; margin:8px 0 6px; }
+  .ratefoot .stars { color:var(--warning); font-size:30px; letter-spacing:6px; margin:0 0 12px; }
   .ratefoot p { font-size:13.5px; color:rgba(255,255,255,.55); max-width:44ch; margin:0 auto; }
   .ratefoot p b { color:rgba(255,255,255,.85); }
   .foot { text-align:center; padding:30px 0 14px; color:rgba(255,255,255,.5); font-size:13px; }
@@ -523,7 +534,7 @@
         <span><b>2&times;</b> active membership</span><i></i>
         <span><b>9M+</b> members</span><i></i>
         <span><b>45+</b> person org</span><i></i>
-        <span><b>15+</b> yrs shipping</span>
+        <span><b>Webby</b> Honoree</span>
       </div>
     </div>
     <div class="showcase" aria-hidden="true">
@@ -733,7 +744,7 @@
     </div>
     <div class="agsteps" id="agsteps" aria-hidden="true">
       <div class="ags"><span class="dot2"></span><b>Reading intent</b><span class="cap">growth, offers, trust: three constraints, parsed</span></div>
-      <div class="ags"><span class="dot2"></span><b>Scanning the record</b><span class="cap">6 shipped products, 15 years, 9M+ members</span></div>
+      <div class="ags"><span class="dot2"></span><b>Scanning the record</b><span class="cap">6 shipped products, 9M+ members, zero padding</span></div>
       <div class="ags"><span class="dot2"></span><b>Checking for gaps</b><span class="cap">1 found. Disclosing it, not hiding it</span></div>
     </div>
     <div class="agres" id="result">
@@ -826,7 +837,7 @@
       <div class="stat"><b><span data-count="45">0</span><i>+</i></b><span>person org: product, design, martech, adtech</span></div>
       <div class="stat"><b><span data-count="9">0</span><i>M+</i></b><span>members on the programs I run</span></div>
       <div class="stat"><b><span data-count="2">0</span><i>&times;</i></b><span>active membership after the loyalty relaunch</span></div>
-      <div class="stat"><b><span data-count="15">0</span><i>+ yrs</i></b><span>shipping loyalty and commerce at scale</span></div>
+      <div class="stat"><b><span data-count="0">0</span></b><span>strategy decks produced. The work ships instead</span></div>
     </div>
     <div class="rv">
       <div class="recrow"><span class="y">2022 – now</span><span><b>Director, Product, Design &amp; Marketing Technology · Air Canada | Aeroplan.</b> Own conversion, engagement, and activation across web and app for one of Canada's largest loyalty programs. Portfolio: member experience, aircanada.com, customer identity, the Compass design system, the martech stack, and adtech. Lead design across the full digital organization.</span></div>
@@ -835,6 +846,25 @@
     </div>
   </div>
 </section>
+
+<div class="stack" id="more">
+  <div class="panelD">
+    <span class="ptag">Beyond this page</span>
+    <h2 class="rv">This page is the catalog. The store is live.</h2>
+    <p class="lead rv">Everything above is a still photo. <b>joseplatero.com is the moving picture:</b> agents compile a morning brief, walk a Jira board, and file a note to a second brain while you read. The keynote game, the origin story, and what people write after the talks are all there too.</p>
+    <a class="pill rv" style="background:#fff; color:var(--indigo-dark); border-color:#fff;" href="https://joseplatero.com/" target="_blank" rel="noopener">Watch the agents work</a>
+    <div class="letters rv">
+      <figure class="letter">
+        <blockquote>This came from chatting with Jose Platero who demo'd his workflow of connecting Jira with Claude via MCP to generate an executive insight report as a skill. I wanted to automate the workflow entirely so it did not have to be prompted and would run without me present.</blockquote>
+        <figcaption><b>Sarah Yeung</b> · Systems &amp; Operations PM, after the AI Product Summit. She then shipped her own weekly digest.</figcaption>
+      </figure>
+      <figure class="letter">
+        <blockquote>I went in expecting a breakdown of frameworks, tools, and product strategies. But instead, Jose focused on something far more foundational: people, culture change, and communication. And honestly? That hit deeper than expected.</blockquote>
+        <figcaption><b>Hugo Cardoso</b> · Business Systems Analyst, after the homepage-rethink talk.</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
 
 <section style="border-top:none; padding-top:0;">
   <div class="cream-sec">
@@ -860,7 +890,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#0a894c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg>
         </div>
         <h3>We tell it like it is</h3>
-        <p>Borrowed the line because it's true here too. This page took an evening. The record took fifteen years.</p>
+        <p>Borrowed the line because it's true here too. This page took an evening. The record took a career, and every line of it is checkable.</p>
       </div>
     </div>
   </div>
@@ -875,7 +905,6 @@
 </div>
 
 <div class="ratefoot">
-  <div class="big">15 yrs</div>
   <div class="stars" aria-hidden="true">★★★★★</div>
   <p><b>Freddie Awards · Webby Honoree · 9M+ members shipped for.</b> Reviews available on request from the 45+ people who report through this role.</p>
 </div>

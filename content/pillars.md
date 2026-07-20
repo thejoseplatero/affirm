@@ -17,5 +17,5 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#0a894c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg>
         </div>
         <h3>We tell it like it is</h3>
-        <p>Borrowed the line because it's true here too. This page took an evening. The record took fifteen years.</p>
+        <p>Borrowed the line because it's true here too. This page took an evening. The record took a career, and every line of it is checkable.</p>
       </div>

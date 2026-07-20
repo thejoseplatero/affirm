@@ -71,7 +71,10 @@ t('rail panels scroll normally (no sticky covering long content)', !/\.panelD \{
 t('offer dock anchors to the bottom of the screen', /\.offerdock \{ position:fixed; bottom/.test(html));
 t('offer dock present and wired', /id="offerdock"/.test(html) && /offerdock\.addEventListener\('click', openOffers\)/.test(html));
 t('no auto-popup takeover (offers open on click only)', !/IntersectionObserver[\s\S]{0,120}osOpen/.test(html));
-t('three dark rail panels', (html.match(/class="panelD"/g) || []).length === 3);
+t('four dark panels (three rails + beyond-this-page)', (html.match(/class="panelD"/g) || []).length === 4);
+t('joseplatero.com promoted, not buried', /id="more"/.test(html) && /Watch the agents work/.test(html));
+t('letters from the field present (2+)', (html.match(/class="letter"/g) || []).length >= 2);
+t('no years-of-experience bragging', !/15\+?\s*(yrs|years)|fifteen years/i.test(html));
 t('panels carry affirm-style tag pills', ['At checkout','In the search bar','On the offer rails'].every(s => html.includes(`<span class="ptag">${s}</span>`)));
 t('agentic search: agent steps present', (html.match(/class="ags"/g) || []).length === 3);
 t('agentic search: answer cites the record', (html.match(/class="cite"/g) || []).length >= 3);
