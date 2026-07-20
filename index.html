@@ -44,29 +44,40 @@
     .lane{animation:none!important}
   }
 
-  /* ---------- top offer banner: drops in, chevron reveals detail ---------- */
-  .topoffer { background:#0c0c24; padding:14px 16px 4px; overflow:hidden; }
-  .topoffer.gone { display:none; }
-  .to-card { max-width:680px; margin:0 auto; background:rgba(255,255,255,.97); border-radius:18px; color:var(--ink);
-             box-shadow:0 18px 50px -20px rgba(0,0,0,.6); transform:translateY(-130%); transition:transform .7s var(--spring); }
-  .topoffer.in .to-card { transform:none; }
-  @media (prefers-reduced-motion:reduce){ .to-card { transition:none; transform:none; } }
-  .to-main { display:flex; align-items:center; gap:14px; width:100%; padding:13px 18px; background:none; border:none;
+  /* ---------- liquid-glass offer toast: flies over content, never pushes it ---------- */
+  .toast { position:fixed; top:84px; left:50%; z-index:45; width:min(680px, calc(100vw - 24px));
+           transform:translate(-50%,-190%); transition:transform .9s cubic-bezier(.3,1.45,.42,1); }
+  .toast.in { transform:translate(-50%,0); }
+  .toast.gone { display:none; }
+  .toast.in.mini { transform:translate(-50%,-190%); }
+  @media (prefers-reduced-motion:reduce){ .toast { transition:none; } }
+  .to-card { position:relative; border-radius:22px; color:var(--ink); overflow:hidden;
+             background:linear-gradient(160deg, rgba(255,255,255,.82), rgba(255,255,255,.58));
+             backdrop-filter:blur(26px) saturate(1.7); -webkit-backdrop-filter:blur(26px) saturate(1.7);
+             border:1px solid rgba(255,255,255,.85);
+             box-shadow:0 26px 70px -24px rgba(10,10,40,.65), inset 0 1px 0 rgba(255,255,255,.95),
+                        inset 0 -18px 34px -24px rgba(74,74,244,.22); }
+  .to-card::before { content:""; position:absolute; inset:-70% -20% auto; height:120%; pointer-events:none;
+                     background:radial-gradient(60% 90% at 30% 0%, rgba(255,255,255,.75), transparent 60%); }
+  .to-main { position:relative; display:flex; align-items:center; gap:14px; width:100%; padding:14px 20px; background:none; border:none;
              cursor:pointer; font:inherit; text-align:left; }
-  .to-icon { flex:none; width:44px; height:30px; border-radius:6px; background:linear-gradient(135deg, var(--indigo-dark), var(--indigo));
-             display:flex; align-items:center; justify-content:center; }
+  .to-icon { flex:none; width:44px; height:30px; border-radius:7px; background:linear-gradient(135deg, var(--indigo-dark), var(--indigo));
+             display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px -6px rgba(33,33,137,.55); }
   .to-text { flex:1; font-size:14.5px; }
   .to-main b { font-weight:700; }
-  .to-chev { flex:none; transition:transform .4s var(--ease); }
+  .to-chev { flex:none; transition:transform .45s var(--spring); }
   .to-main[aria-expanded="true"] .to-chev { transform:rotate(180deg); }
-  .to-x { position:absolute; top:-9px; right:-9px; width:26px; height:26px; border-radius:50%; border:none; cursor:pointer;
-          background:var(--ink); color:#fff; font-size:15px; line-height:1; display:flex; align-items:center; justify-content:center; }
-  .to-detail { max-height:0; overflow:hidden; transition:max-height .55s var(--ease); }
-  .to-detail.open { max-height:220px; }
-  .to-detail .inner { padding:4px 18px 18px 76px; }
+  .to-x { position:absolute; top:10px; right:-6px; transform:translateX(100%); width:26px; height:26px; border-radius:50%; border:none;
+          cursor:pointer; background:rgba(15,15,36,.85); color:#fff; font-size:15px; line-height:1;
+          display:flex; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+  .toast .to-x { position:absolute; }
+  .to-detail { max-height:0; overflow:hidden; transition:max-height .6s var(--ease); }
+  .to-detail.open { max-height:240px; }
+  .to-detail .inner { padding:2px 20px 18px 78px; }
   .to-detail p { font-size:14px; color:var(--ink-80); margin-bottom:12px; max-width:52ch; }
   .to-detail .pill.sm { background:var(--indigo); color:#fff; border-color:var(--indigo); }
-  @media (max-width:640px){ .to-detail .inner { padding-left:18px; } .to-text { font-size:13.5px; } }
+  @media (max-width:640px){ .to-detail .inner { padding-left:20px; } .to-text { font-size:13.5px; }
+    .toast { top:78px; } .to-x { right:8px; transform:none; top:-9px; } }
 
   /* ---------- nav: dark glass pill floating over everything, like affirm.com's hero bar ---------- */
   nav { position:sticky; top:14px; z-index:20; padding:0 16px; }
@@ -129,10 +140,12 @@
   /* phone checkout + floating glass category cards */
   .showcase { position:relative; height:520px; }
   @media (max-width:880px){ .showcase { height:auto; padding:12px 0 8px; } }
-  .phone { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(320px,86%);
-           background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.22); border-radius:34px;
-           backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); padding:22px 20px 16px;
-           box-shadow:0 40px 90px -30px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.18); }
+  .showcase::before { content:""; position:absolute; left:50%; top:50%; width:560px; height:560px; transform:translate(-50%,-50%);
+                      background:radial-gradient(circle, rgba(74,74,244,.42), transparent 62%); pointer-events:none; }
+  .phone { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(340px,88%);
+           background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.26); border-radius:36px;
+           backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); padding:24px 22px 16px;
+           box-shadow:0 50px 110px -34px rgba(0,0,0,.7), 0 0 90px -20px rgba(74,74,244,.5), inset 0 1px 0 rgba(255,255,255,.22); }
   @media (max-width:880px){ .phone { position:relative; left:auto; top:auto; transform:none; margin:0 auto; } }
   .ph-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(168,169,252,.22); color:#dcdcfe;
              border:1px solid rgba(168,169,252,.35); font-weight:700; font-size:12.5px; padding:6px 13px; border-radius:999px; margin-bottom:16px; }
@@ -155,20 +168,22 @@
   .ph-visual p { font-size:13px; color:rgba(255,255,255,.82); line-height:1.45; }
   .ph-visual p b { color:#fff; }
   .ph-note { text-align:center; font-size:10.5px; color:rgba(255,255,255,.45); margin-top:12px; }
-  .catcard { position:absolute; width:min(215px,58%); background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
-             border-radius:20px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); padding:20px 18px 16px;
-             font-size:13px; line-height:1.45; color:rgba(255,255,255,.85);
-             box-shadow:0 26px 60px -24px rgba(0,0,0,.55); will-change:transform; animation:float 7s ease-in-out infinite; }
+  .catcard { position:absolute; width:172px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+             border-radius:18px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:18px 15px 13px;
+             font-size:11.5px; line-height:1.4; color:rgba(255,255,255,.78); opacity:.94;
+             box-shadow:0 22px 50px -22px rgba(0,0,0,.55); will-change:transform; animation:drift 9s ease-in-out infinite; }
   .catcard b { color:#fff; font-weight:600; }
-  .catcard .cat-pill { position:absolute; top:-12px; left:16px; transform:rotate(-3deg); }
+  .catcard .cat-pill { position:absolute; top:-11px; left:13px; transform:rotate(-3deg); font-size:12px; padding:4px 12px; }
   @keyframes float { 0%,100%{ transform:translateY(0) rotate(var(--tilt,0deg)); } 50%{ transform:translateY(-13px) rotate(var(--tilt,0deg)); } }
-  .phone { z-index:1; }
-  .catcard { z-index:2; }
-  .cc1 { top:-1%; left:-5%; --tilt:-5deg; }
-  .cc2 { top:5%; right:-7%; --tilt:4deg; animation-delay:1.2s; }
-  .cc3 { bottom:0; left:-7%; --tilt:3deg; animation-delay:2.1s; }
-  .cc4 { bottom:-5%; right:-5%; --tilt:-3deg; animation-delay:.6s; }
-  @media (max-width:880px){ .catcard { display:none; } }
+  @keyframes drift { 0%,100%{ transform:translate(0,0) rotate(var(--tilt,0deg)); }
+                     33%{ transform:translate(var(--dx,6px),-12px) rotate(var(--tilt,0deg)); }
+                     66%{ transform:translate(calc(var(--dx,6px)*-1),-5px) rotate(var(--tilt,0deg)); } }
+  .phone { z-index:2; }
+  .catcard { z-index:1; }
+  .cc1 { top:2%; left:-6%; --tilt:-6deg; --dx:7px; }
+  .cc2 { top:36%; right:-1%; --tilt:5deg; --dx:-8px; animation-delay:1.4s; }
+  .cc3 { bottom:-2%; left:-3%; --tilt:4deg; --dx:5px; animation-delay:2.6s; }
+  @media (max-width:880px){ .catcard { display:none; } .showcase::before { display:none; } }
 
   /* ---------- sections ---------- */
   section { padding:84px 0; }
@@ -251,6 +266,78 @@
               transition:background .25s, transform .3s var(--spring); }
   .cart-cta:hover { background:var(--indigo-mid); transform:translateY(-2px); }
 
+  /* ---------- sticky stacked dark panels (affirm.com's signature scroll) ---------- */
+  .railshead { padding:84px 0 10px; }
+  .stack { max-width:1060px; margin:0 auto; padding:0 28px 84px; }
+  .panelD { position:sticky; top:86px; margin-bottom:28px; border-radius:36px; padding:52px 54px 56px; overflow:hidden;
+            background:linear-gradient(175deg, #12122e, #0c0c21 60%); border:1px solid rgba(168,169,252,.3); color:#fff;
+            box-shadow:0 40px 90px -40px rgba(5,5,20,.9); }
+  .panelD:last-child { margin-bottom:0; }
+  @media (max-width:760px){ .panelD { padding:34px 24px 40px; border-radius:26px; top:76px; } .stack { padding:0 16px 64px; } }
+  .ptag { display:inline-flex; align-items:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+          color:rgba(255,255,255,.85); font-weight:600; font-size:12.5px; padding:7px 15px; border-radius:999px; margin-bottom:22px;
+          backdrop-filter:blur(8px); }
+  .panelD h2 { color:#fff; }
+  .panelD .lead { color:rgba(255,255,255,.68); }
+  .panelD .lead b { color:rgba(255,255,255,.92); }
+  .panelD .eyebrow { color:var(--indigo-light); }
+  /* dark reskin: checkout module */
+  .panelD .checkout { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18);
+                      box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 30px 70px -30px rgba(0,0,0,.55); }
+  .panelD .co-head { border-bottom-color:rgba(255,255,255,.14); }
+  .panelD .co-head .terms { color:rgba(255,255,255,.6); }
+  .panelD .planbar { background:rgba(255,255,255,.1); }
+  .panelD .planbar .thumb { background:#fff; }
+  .panelD .planbar button { color:rgba(255,255,255,.65); }
+  .panelD .planbar button.on { color:var(--indigo-dark); }
+  .panelD .plan-sub { color:rgba(255,255,255,.6); }
+  .panelD .srow p { color:rgba(255,255,255,.62); }
+  .panelD .srow .tick { background:rgba(42,188,122,.2); color:#7fe0b0; }
+  .panelD .srow.pending .tick { background:rgba(168,169,252,.2); color:var(--indigo-light); }
+  .panelD .co-foot { border-top-color:rgba(255,255,255,.14); }
+  .panelD .co-foot .apr { color:#7fe0b0; }
+  /* dark reskin: marquee chips */
+  .panelD .chip { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.16); color:rgba(255,255,255,.9); }
+  .panelD .marquee { margin-left:-54px; margin-right:-54px; }
+  @media (max-width:760px){ .panelD .marquee { margin-left:-24px; margin-right:-24px; } }
+
+  /* ---------- agentic search demo ---------- */
+  .agq { display:flex; align-items:center; gap:12px; background:rgba(255,255,255,.09); border:1.5px solid rgba(255,255,255,.22);
+         border-radius:999px; padding:16px 24px; max-width:640px; backdrop-filter:blur(10px); }
+  .agq .q { color:#fff; }
+  .agsteps { max-width:640px; margin:18px 0 0; display:flex; flex-direction:column; gap:0; }
+  .ags { display:flex; align-items:center; gap:12px; padding:11px 6px; font-size:14px; opacity:0; transform:translateY(8px);
+         transition:opacity .5s var(--ease), transform .5s var(--ease); }
+  .ags.show { opacity:1; transform:none; }
+  .ags .dot2 { flex:none; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .ags.run .dot2 { border:2px solid rgba(255,255,255,.3); border-top-color:#fff; animation:spin .8s linear infinite; }
+  .ags.done .dot2 { border:none; background:rgba(42,188,122,.25); color:#7fe0b0; font-size:12px; font-weight:800; animation:none; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  @media (prefers-reduced-motion:reduce){ .ags.run .dot2 { animation:none; border-color:#fff; } }
+  .ags b { font-weight:600; }
+  .ags .cap { color:rgba(255,255,255,.55); font-size:12.5px; margin-left:4px; }
+  .agres { max-width:640px; margin-top:18px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+           border-radius:22px; padding:24px 26px; opacity:0; transform:translateY(16px);
+           transition:opacity .7s var(--ease), transform .7s var(--ease); backdrop-filter:blur(12px); }
+  .agres.show { opacity:1; transform:none; }
+  .agres .ans { font-size:15px; line-height:1.55; color:rgba(255,255,255,.92); margin-bottom:16px; }
+  .agres .ans b { font-weight:700; color:#fff; }
+  .panelD .match .lbl { color:rgba(255,255,255,.85); }
+  .panelD .match .lbl .pct { color:var(--indigo-light); }
+  .panelD .match .lbl .pct.hon { color:var(--warning); }
+  .panelD .bar { background:rgba(255,255,255,.12); }
+  .panelD .bar i { background:var(--indigo-light); }
+  .panelD .bar i.hon { background:var(--warning); }
+  .cites { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .cite { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+          color:#fff; font-size:12.5px; font-weight:600; padding:7px 13px; border-radius:999px; text-decoration:none;
+          transition:background .25s, transform .3s var(--spring); }
+  .cite:hover { background:rgba(255,255,255,.2); transform:translateY(-2px); }
+  .agnote { margin-top:16px; padding-top:14px; border-top:1px dashed rgba(255,255,255,.18); font-size:13px; color:rgba(255,255,255,.62); }
+  .agnote b { color:rgba(255,255,255,.9); }
+  .agpost { font-size:15px; color:rgba(255,255,255,.75); max-width:58ch; margin-top:26px; }
+  .agpost b { color:#fff; }
+
   /* ---------- demo 01: the plan picker ---------- */
   .demo1 { display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; }
   @media (max-width:880px){ .demo1 { grid-template-columns:1fr; gap:34px; } }
@@ -282,25 +369,11 @@
   .co-foot b { font-weight:700; }
   .co-foot .apr { color:var(--success-dark); font-weight:700; }
 
-  /* ---------- demo 02: honest search ---------- */
-  .search-sec { background:var(--neutral-2); border-top:none !important; }
-  .searchbox { background:#fff; border:1.5px solid var(--border); border-radius:999px; display:flex; align-items:center; gap:12px;
-               padding:16px 24px; max-width:640px; box-shadow:0 18px 44px -22px rgba(33,33,137,.18); }
-  .searchbox svg { flex:none; }
+  /* ---------- search primitives (used inside the agentic panel) ---------- */
   .q { font-size:16.5px; font-weight:500; min-height:25px; }
-  .caret { display:inline-block; width:2px; height:1.15em; background:var(--indigo); vertical-align:text-bottom; margin-left:1px;
+  .caret { display:inline-block; width:2px; height:1.15em; background:var(--indigo-light); vertical-align:text-bottom; margin-left:1px;
            animation:blink 1s steps(1) infinite; }
   @keyframes blink { 50% { opacity:0; } }
-  .resmeta { font-size:12.5px; color:var(--dim); margin:18px 4px 10px; opacity:0; transition:opacity .5s var(--ease); }
-  .resmeta.show { opacity:1; }
-  .result { background:#fff; border:1px solid var(--border); border-radius:var(--r); padding:26px; max-width:640px;
-            opacity:0; transform:translateY(18px) scale(.985); transition:opacity .7s var(--ease), transform .7s var(--ease); }
-  .result.show { opacity:1; transform:none; }
-  .res-top { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
-  .avatar { width:46px; height:46px; border-radius:50%; background:var(--indigo); color:#fff; display:flex; align-items:center;
-            justify-content:center; font:600 16px Poppins,sans-serif; }
-  .res-top h3 { font-family:Poppins,sans-serif; font-size:17px; font-weight:600; }
-  .res-top p { font-size:13px; color:var(--dim); }
   .match { margin-bottom:12px; }
   .match .lbl { display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px; }
   .match .lbl b { font-weight:600; }
@@ -310,12 +383,8 @@
   .bar i { display:block; height:100%; width:0; border-radius:999px; background:var(--indigo);
            transition:width 1.1s var(--ease); }
   .bar i.hon { background:var(--warning); }
-  .res-note { margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-size:13.5px; color:var(--dim); }
-  .res-note b { color:var(--ink-80); }
-  .search-post { font-size:15px; color:var(--ink-80); max-width:56ch; margin-top:30px; }
 
   /* ---------- demo 03: offers marquee ---------- */
-  .offers-sec { overflow:hidden; }
   .marquee { display:flex; gap:14px; width:max-content; animation:lane 36s linear infinite; margin-bottom:14px; }
   .marquee.rev { animation-direction:reverse; animation-duration:42s; }
   .marquee:hover { animation-play-state:paused; }
@@ -433,6 +502,11 @@
   .band .pill { background:#fff; color:var(--indigo-dark); border-color:#fff; margin-top:30px; }
   .band .pill:hover { background:var(--cream); border-color:var(--cream); box-shadow:0 14px 30px -12px rgba(0,0,0,.35); }
 
+  .ratefoot { text-align:center; padding:56px 28px 8px; }
+  .ratefoot .big { font-family:Poppins,sans-serif; font-size:44px; font-weight:700; letter-spacing:-.02em; color:var(--ink); line-height:1; }
+  .ratefoot .stars { color:var(--warning); font-size:17px; letter-spacing:3px; margin:8px 0 6px; }
+  .ratefoot p { font-size:13.5px; color:var(--dim); max-width:44ch; margin:0 auto; }
+  .ratefoot p b { color:var(--ink-80); }
   .foot { text-align:center; padding:30px 0 14px; color:var(--dim); font-size:13px; }
   .foot a { color:var(--indigo); text-decoration:none; }
   .disclaimer { text-align:center; padding:0 28px 46px; color:#ababab; font-size:11.5px; max-width:56ch; margin:0 auto; }
@@ -440,9 +514,9 @@
 </head>
 <body>
 
-<div class="topoffer" id="topoffer">
-  <div class="to-card" style="position:relative;">
-    <button class="to-x" id="tox" aria-label="Dismiss offer banner">&times;</button>
+<div class="toast" id="topoffer" role="region" aria-label="Current offer">
+  <button class="to-x" id="tox" aria-label="Dismiss offer banner">&times;</button>
+  <div class="to-card">
     <button class="to-main" id="tomain" aria-expanded="false" aria-controls="todetail">
       <span class="to-icon" aria-hidden="true">
         <svg viewBox="0 0 40 40" width="20" height="20"><path d="M8 26 A12 12 0 0 1 32 26" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
@@ -501,19 +575,15 @@
     <div class="showcase" id="collage" aria-hidden="true">
       <div class="catcard cc1" data-depth="18">
         <span class="cat-pill">Travel</span>
-<b>Aeroplan relaunch.</b> Owned the member-facing rebuild. Active membership doubled.
+<b>Aeroplan relaunch.</b> Membership 2&times;.
       </div>
       <div class="catcard cc2" data-depth="26">
         <span class="cat-pill">AI-native</span>
-<b>Agents in daily use.</b> Drafting PRDs, reports, and capacity plans across the team. Live at joseplatero.com.
+<b>Agents ship daily.</b> PRDs to plans.
       </div>
       <div class="catcard cc3" data-depth="14">
         <span class="cat-pill">Offers</span>
-<b>Co-brand card offers</b> inside booking and loyalty flows. A net-new revenue line plus a net-new adtech function.
-      </div>
-      <div class="catcard cc4" data-depth="22">
-        <span class="cat-pill">Design</span>
-        <b>Design org, run directly.</b> The full digital design practice reports through this role, not beside it.
+<b>Card offers in booking.</b> Net-new line.
       </div>
       <div class="phone">
         <span class="ph-chip">
@@ -654,9 +724,17 @@
   </div>
 </section>
 
-<section id="demo">
+<div class="railshead">
   <div class="wrap">
-    <div class="eyebrow rv">The demo · 01</div>
+    <div class="eyebrow rv">How I'd work your rails</div>
+    <h2 class="rv">Three rails. One operating model.</h2>
+    <p class="lead rv" style="margin-bottom:0;">Checkout, search, offers: the three places a Shopping &amp; Offers Director earns their keep. Each panel below is a working demo, not a slide.</p>
+  </div>
+</div>
+
+<div class="stack">
+<div class="panelD" id="demo">
+    <span class="ptag">At checkout</span>
     <h2 class="rv">Hire now, value later.</h2>
     <div class="demo1">
       <div>
@@ -701,48 +779,48 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+</div>
 
-<section class="search-sec" id="search">
-  <div class="wrap">
-    <div class="eyebrow rv">The demo · 02</div>
-    <h2 class="rv">Search that tells the truth.</h2>
-    <p class="lead rv">Your JD calls agentic search your biggest bet. Here's the property I'd protect while building it: <b>honest relevance beats flattering noise.</b> Watch it run on the hardest query I could give it.</p>
-    <div class="searchbox rv" id="searchbox">
-      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="var(--dim)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+<div class="panelD" id="search">
+    <span class="ptag">In the search bar</span>
+    <h2 class="rv">Agentic search, demoed live.</h2>
+    <p class="lead rv">Your JD calls agentic search the biggest bet in Shopping. So here's one running on the hardest catalog I own: my own record. It parses intent, scans, and <b>discloses what it finds, including the weak match.</b></p>
+    <div class="agq rv" id="searchbox">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
       <span class="q" id="qtext"></span><span class="caret" id="caret"></span>
     </div>
-    <div class="resmeta" id="resmeta">1 result · 0.21s · no sponsored placements</div>
-    <div class="result" id="result">
-      <div class="res-top">
-        <div class="avatar">JP</div>
-        <div>
-          <h3>Jose Platero</h3>
-          <p>Director, Product, Design &amp; Marketing Technology · Air Canada | Aeroplan · Toronto</p>
-        </div>
-      </div>
+    <div class="agsteps" id="agsteps" aria-hidden="true">
+      <div class="ags"><span class="dot2"></span><b>Reading intent</b><span class="cap">growth, offers, trust: three constraints, parsed</span></div>
+      <div class="ags"><span class="dot2"></span><b>Scanning the record</b><span class="cap">6 shipped products, 15 years, 9M+ members</span></div>
+      <div class="ags"><span class="dot2"></span><b>Checking for gaps</b><span class="cap">1 found. Disclosing it, not hiding it</span></div>
+    </div>
+    <div class="agres" id="result">
+      <p class="ans"><b>1 match.</b> Strong on leadership through managers, consumer commerce at scale, and an AI-native operating model already in daily use. One gap, disclosed now instead of discovered in month two.</p>
       <div class="match"><div class="lbl"><b>People leadership through managers</b><span class="pct" data-n="96">0%</span></div><div class="bar"><i data-w="96"></i></div></div>
       <div class="match"><div class="lbl"><b>AI-native operating model, shipped</b><span class="pct" data-n="98">0%</span></div><div class="bar"><i data-w="98"></i></div></div>
       <div class="match"><div class="lbl"><b>Consumer commerce, shipped at scale</b><span class="pct" data-n="93">0%</span></div><div class="bar"><i data-w="93"></i></div></div>
       <div class="match"><div class="lbl"><b>Payments &amp; lending domain</b><span class="pct hon" data-n="61">0%</span></div><div class="bar"><i class="hon" data-w="61"></i></div></div>
-      <div class="res-note"><b>Why the 61% is showing:</b> because a search you can trust doesn't hide weak matches, it explains them. Mine is co-brand credit monetization inside booking flows: adjacent, improving, and disclosed. The search I'd build for your shoppers keeps the same promise.</div>
+      <div class="cites">
+        <a class="cite" href="#shop">Aeroplan Relaunch</a>
+        <a class="cite" href="#shop">Co-brand Offers Engine</a>
+        <a class="cite" href="#shop">AI Operating Model</a>
+        <a class="cite" href="#terms">The disclosed gap</a>
+      </div>
+      <div class="agnote"><b>Why the 61% stays on screen:</b> an agent your shoppers can trust explains weak matches instead of burying them. Mine is co-brand credit monetization inside booking flows: adjacent, improving, disclosed. The agent I'd build for your catalog keeps the same promise.</div>
     </div>
-    <p class="search-post rv">That's the whole philosophy in one interaction. Transparency isn't a compliance layer at Affirm, it's the conversion engine. Search should run on it too.</p>
-  </div>
-</section>
+    <p class="agpost rv">And the next rail is already in discovery: <b>how offers show up when the shopper is an AI.</b> My growth team runs routes and credit cards today, and we're instrumenting how both appear inside AI answers. Those reps transfer straight to your shelf.</p>
+</div>
 
-<section class="offers-sec" id="offers">
-  <div class="wrap">
-    <div class="eyebrow rv">The demo · 03</div>
+<div class="panelD" id="offers">
+    <span class="ptag">On the offer rails</span>
     <h2 class="rv">Offers with a track record.</h2>
     <p class="lead rv">Every offer below already cleared. Hover to pause and inspect, exactly how offer rails should behave.</p>
-  </div>
   <div class="marquee" id="mq1">
     <span class="chip"><span class="tag g">Shipped</span>Aeroplan relaunch · active membership 2×</span>
     <span class="chip"><span class="tag g">Shipped</span>Webby Honoree homepage rethink</span>
     <span class="chip"><span class="tag i">Live</span>Agents drafting PRDs, reports &amp; capacity plans daily</span>
     <span class="chip"><span class="tag g">Shipped</span>Status relaunch · 9M+ members migrated</span>
+    <span class="chip"><span class="tag i">In flight</span>Agentic insights · offers inside AI answers</span>
     <span class="chip"><span class="tag y">0% APR</span>on all advice for the first 25 minutes</span>
     <span class="chip"><span class="tag g">Shipped</span>Campaign turnaround · months → minutes</span>
   </div>
@@ -754,10 +832,11 @@
     <span class="chip"><span class="tag g">Shipped</span>Multiple Freddie Awards</span>
     <span class="chip"><span class="tag y">No late fees</span>weekly status posted, arrows and all</span>
   </div>
-  <div class="wrap" style="margin-top:34px;">
-    <a class="pill rv" href="#offers" id="offerbtn">See today's offers</a>
+  <div style="margin-top:34px;">
+    <a class="pill rv" href="#offers" id="offerbtn" style="background:#fff; color:var(--indigo-dark); border-color:#fff;">See today's offers</a>
   </div>
-</section>
+</div>
+</div>
 
 <section id="terms">
   <div class="wrap">
@@ -853,6 +932,11 @@
   </div>
 </div>
 
+<div class="ratefoot">
+  <div class="big">15 yrs</div>
+  <div class="stars" aria-hidden="true">★★★★★</div>
+  <p><b>Freddie Awards · Webby Honoree · 9M+ members shipped for.</b> Reviews available on request from the 45+ people who report through this role.</p>
+</div>
 <div class="foot">
   <a href="https://www.linkedin.com/in/joseplatero/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://joseplatero.com/" target="_blank" rel="noopener">joseplatero.com</a>
 </div>
@@ -978,33 +1062,47 @@ planbar.addEventListener('click', e => { const b = e.target.closest('button'); i
 addEventListener('resize', ()=> setThumb(planbar.querySelector('button.on')));
 setTimeout(()=> setThumb(planbar.querySelector('button.on')), 60);
 
-/* honest search: typewriter then result */
-const QUERY = 'director who ships agentic search, runs design, and names their own gaps';
+/* agentic search: typewriter, then the agent shows its work, then the answer */
+const QUERY = 'find a director who can grow offers without burning shopper trust';
 const qtext = document.getElementById('qtext');
 const caret = document.getElementById('caret');
 let searchRan = false;
+function showAnswer(){
+  const res = document.getElementById('result');
+  res.classList.add('show');
+  setTimeout(()=>{
+    res.querySelectorAll('.bar i').forEach(b => b.style.width = b.dataset.w+'%');
+    res.querySelectorAll('.pct').forEach(p => {
+      const target = +p.dataset.n, t0 = performance.now(), dur = 1100;
+      (function tick(t){ const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+        p.textContent = Math.round(target*e)+'%'; if (k<1) requestAnimationFrame(tick); })(t0);
+      setTimeout(()=>{ p.textContent = target+'%'; }, dur + 400); /* rAF pauses in occluded tabs */
+    });
+  }, 250);
+}
 function runSearch(){
   if (searchRan) return; searchRan = true;
+  const steps = [...document.querySelectorAll('.ags')];
   const finish = () => {
     caret.style.display = 'none';
-    document.getElementById('resmeta').classList.add('show');
-    const res = document.getElementById('result');
-    res.classList.add('show');
-    setTimeout(()=>{
-      res.querySelectorAll('.bar i').forEach(b => b.style.width = b.dataset.w+'%');
-      res.querySelectorAll('.pct').forEach(p => {
-        const target = +p.dataset.n, t0 = performance.now(), dur = 1100;
-        (function tick(t){ const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
-          p.textContent = Math.round(target*e)+'%'; if (k<1) requestAnimationFrame(tick); })(t0);
-      });
-    }, 250);
+    if (reduced) {
+      steps.forEach(s=>{ s.classList.add('show','done'); s.querySelector('.dot2').textContent = '✓'; });
+      showAnswer(); return;
+    }
+    let t = 250;
+    steps.forEach(s => {
+      setTimeout(()=>s.classList.add('show','run'), t);
+      setTimeout(()=>{ s.classList.remove('run'); s.classList.add('done'); s.querySelector('.dot2').textContent = '✓'; }, t + 680);
+      t += 780;
+    });
+    setTimeout(showAnswer, t + 120);
   };
   if (reduced) { qtext.textContent = QUERY; finish(); return; }
   let i = 0;
   (function type(){
     qtext.textContent = QUERY.slice(0, ++i);
-    if (i < QUERY.length) setTimeout(type, 26 + Math.random()*38);
-    else setTimeout(finish, 380);
+    if (i < QUERY.length) setTimeout(type, 24 + Math.random()*34);
+    else setTimeout(finish, 340);
   })();
 }
 const sio = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ runSearch(); sio.disconnect(); } }),{threshold:.4});
@@ -1018,6 +1116,7 @@ function runCount(el){
   const target = +el.dataset.count, t0 = performance.now(), dur = 1200;
   (function tick(t){ const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
     el.textContent = Math.round(target*e); if (k<1) requestAnimationFrame(tick); })(t0);
+  setTimeout(()=>{ el.textContent = target; }, dur + 400); /* rAF pauses in occluded tabs */
 }
 const cio = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target);} }),{threshold:.3});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
@@ -1027,16 +1126,22 @@ addEventListener('scroll', ()=>{ document.querySelectorAll('[data-count]:not([da
 /* marquees: duplicate content for seamless loop */
 ['mq1','mq2'].forEach(id => { const m = document.getElementById(id); m.innerHTML += m.innerHTML; });
 
-/* top offer banner: drop in, chevron reveals, x dismisses */
+/* liquid-glass offer toast: flies in on top, collapses politely on scroll */
 const topoffer = document.getElementById('topoffer');
 const tomain = document.getElementById('tomain');
 const todetail = document.getElementById('todetail');
-setTimeout(()=>topoffer.classList.add('in'), reduced ? 0 : 600);
+setTimeout(()=>topoffer.classList.add('in'), reduced ? 0 : 900);
 tomain.addEventListener('click', ()=>{
   const open = todetail.classList.toggle('open');
   tomain.setAttribute('aria-expanded', open);
 });
 document.getElementById('tox').addEventListener('click', ()=>topoffer.classList.add('gone'));
+addEventListener('scroll', ()=>{
+  topoffer.classList.toggle('mini', scrollY > 140);
+  if (scrollY > 140 && todetail.classList.contains('open')) {
+    todetail.classList.remove('open'); tomain.setAttribute('aria-expanded','false');
+  }
+}, {passive:true});
 
 /* cart: add products, flyout drawer, checkout builds the email */
 const cartlay = document.getElementById('cartlay');

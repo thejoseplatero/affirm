@@ -1,1 +1,1 @@
-That's the whole philosophy in one interaction. Transparency isn't a compliance layer at Affirm, it's the conversion engine. Search should run on it too.
+And the next rail is already in discovery: <b>how offers show up when the shopper is an AI.</b> My growth team runs routes and credit cards today, and we're instrumenting how both appear inside AI answers. Those reps transfer straight to your shelf.

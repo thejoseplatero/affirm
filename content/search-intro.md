@@ -1,1 +1,1 @@
-<p class="lead rv">Your JD calls agentic search your biggest bet. Here's the property I'd protect while building it: <b>honest relevance beats flattering noise.</b> Watch it run on the hardest query I could give it.</p>
+<p class="lead rv">Your JD calls agentic search the biggest bet in Shopping. So here's one running on the hardest catalog I own: my own record. It parses intent, scans, and <b>discloses what it finds, including the weak match.</b></p>
