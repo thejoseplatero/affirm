@@ -438,9 +438,10 @@
   .stat { background:#111129; padding:36px 26px 30px; transition:background .3s; }
   .stat:hover { background:#16163a; }
   .stat b { font-family:Poppins,sans-serif; display:flex; align-items:baseline; gap:2px; white-space:nowrap;
-            font-size:clamp(34px,4.6vw,58px); font-weight:700; line-height:1; letter-spacing:-.02em; color:var(--indigo-light); margin-bottom:14px; }
+            font-size:clamp(46px,5.6vw,72px); font-weight:700; line-height:1; letter-spacing:-.02em; color:var(--indigo-light); margin-bottom:14px; }
   .stat b i { font-style:normal; font-size:.42em; font-weight:700; }
-  .stat span { display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,.7); letter-spacing:.01em; line-height:1.4; max-width:20ch; }
+  .stat b span { display:inline; font-size:inherit; color:inherit; }
+  .stat > span { display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,.7); letter-spacing:.01em; line-height:1.4; max-width:20ch; }
   .recrow { display:grid; grid-template-columns:120px 1fr; gap:20px; padding:17px 0; border-top:1px solid rgba(255,255,255,.1); font-size:15px; }
   .recrow:first-of-type { border-top:none; }
   .recrow .y { color:rgba(255,255,255,.45); font-size:13.5px; padding-top:2px; }
@@ -461,17 +462,18 @@
   .pillar h3 { font-family:Poppins,sans-serif; font-size:16.5px; font-weight:600; margin-bottom:8px; color:#fff; }
   .pillar p { color:rgba(255,255,255,.68); font-size:14.5px; }
 
-  /* ---------- indigo band ---------- */
-  .band { position:relative; background:var(--indigo); color:#fff; padding:88px 0; overflow:hidden; border-top:none !important; }
-  .band::before { content:""; position:absolute; width:520px; height:520px; border-radius:50%; right:-140px; top:-200px;
-                  background:radial-gradient(circle, #a8a9fc55, transparent 65%); }
-  .band::after { content:""; position:absolute; width:380px; height:380px; border-radius:50%; left:-120px; bottom:-190px;
-                 background:radial-gradient(circle, #21218966, transparent 65%); }
+  /* ---------- closing band: dark panel with the affirm arc rising ---------- */
+  .band { position:relative; background:linear-gradient(175deg, #12122e, #0c0c21 60%); border:1px solid rgba(168,169,252,.3);
+          border-radius:36px; max-width:1004px; margin:0 auto; padding:96px 32px 130px; text-align:center; overflow:hidden; color:#fff; }
+  .band::before { content:""; position:absolute; left:50%; bottom:-960px; transform:translateX(-50%);
+                  width:980px; height:980px; border-radius:50%; border:64px solid var(--indigo);
+                  box-shadow:0 0 140px rgba(74,74,244,.55), inset 0 0 90px rgba(74,74,244,.4); pointer-events:none; }
   .band .wrap { position:relative; z-index:1; }
-  .band h2 { color:#fff; font-size:clamp(30px,4.6vw,48px); max-width:18ch; }
-  .band p { color:rgba(255,255,255,.88); font-size:17.5px; max-width:52ch; margin-top:16px; }
-  .band .pill { background:#fff; color:var(--indigo-dark); border-color:#fff; margin-top:30px; }
-  .band .pill:hover { background:var(--cream); border-color:var(--cream); box-shadow:0 14px 30px -12px rgba(0,0,0,.35); }
+  .band h2 { color:#fff; font-size:clamp(30px,4.6vw,48px); margin:0 auto; }
+  .band p { color:rgba(255,255,255,.78); font-size:17.5px; max-width:52ch; margin:16px auto 0; }
+  .band .pill { background:#fff; color:var(--indigo-dark); border-color:#fff; margin-top:32px; }
+  .band .pill:hover { background:var(--indigo-lightest); border-color:var(--indigo-lightest); box-shadow:0 14px 30px -12px rgba(0,0,0,.45); }
+  @media (max-width:760px){ .band { border-radius:26px; margin:0 16px; padding:72px 24px 104px; } }
 
   .ratefoot { text-align:center; padding:56px 28px 8px; }
   .ratefoot .big { font-family:Poppins,sans-serif; font-size:44px; font-weight:700; letter-spacing:-.02em; color:#fff; line-height:1; }
