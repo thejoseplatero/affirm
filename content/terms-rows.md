@@ -4,7 +4,7 @@
       </div>
       <div class="brow">
         <span class="btag fit">Direct fit</span>
-        <p><b>Agentic, AI-native product development.</b> Not a familiarity claim. A shipped system. I built and run the operating model where agents draft PRDs and user stories, prep executive reporting, audit initiatives, and plan capacity, in daily use across my team. This page itself came out of that system, and the agents run live at <a href="https://joseplatero.com/" target="_blank" rel="noopener" style="color:var(--indigo); font-weight:600;">joseplatero.com</a>: watch them compile a brief, walk a Jira board, and file a note while you read.</p>
+        <p><b>Agentic, AI-native product development.</b> Not a familiarity claim. A shipped system. I built and run the operating model where agents draft PRDs and user stories, prep executive reporting, audit initiatives, and plan capacity, in daily use across my team. This page itself came out of that system, and <a href="https://joseplatero.com/" target="_blank" rel="noopener" style="color:#fff; font-weight:700; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--indigo-light);">joseplatero.com</a> shows it in motion: demos of a brief compiling, a Jira board walk, and a note landing in a second brain.</p>
       </div>
       <div class="brow">
         <span class="btag fit">Direct fit</span>
@@ -20,7 +20,7 @@
       </div>
       <div class="brow">
         <span class="btag adjacent">Adjacent, not identical</span>
-        <p><b>Commerce monetization, not payments.</b> I put targeted co-brand credit card offers inside booking, ancillary, and loyalty flows: a new revenue line on pages customers were already on, and stood up a net-new adtech function, team and commercial model, from scratch. A real track record monetizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
+        <p><b>Commerce monetization, not payments.</b> I put targeted co-brand credit card offers inside booking, ancillary, and loyalty flows: a new revenue line on pages customers were already on. I built the martech and adtech functions from zero, team and commercial model included, the same way I built out the design practice. A real track record monetizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
       </div>
       <div class="brow">
         <span class="btag gap">Fewer reps</span>

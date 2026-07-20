@@ -186,10 +186,14 @@
   .gridshop { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
   @media (max-width:960px){ .gridshop { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:560px){ .gridshop { grid-template-columns:1fr; } }
-  .prod { background:#fff; color:var(--ink); border:1px solid rgba(255,255,255,.14); border-radius:20px; overflow:hidden;
+  .prod { background:#fff; color:var(--ink); border:1px solid rgba(255,255,255,.14); border-radius:22px; overflow:hidden;
           display:flex; flex-direction:column; box-shadow:0 22px 50px -30px rgba(0,0,0,.7);
           transition:transform .35s var(--spring), box-shadow .35s; }
-  .prod:hover { transform:translateY(-5px); box-shadow:0 32px 70px -30px rgba(0,0,0,.8); }
+  .prod:hover { transform:translateY(-6px) scale(1.012);
+                box-shadow:0 32px 70px -30px rgba(0,0,0,.8), 0 0 44px -10px rgba(74,74,244,.5); }
+  .p-img svg { transition:transform .5s var(--spring); }
+  .prod:hover .p-img svg { transform:translateY(-6px) scale(1.07); }
+  @media (prefers-reduced-motion:reduce){ .prod:hover .p-img svg { transform:none; } }
   .p-img { position:relative; height:150px; display:flex; align-items:center; justify-content:center; }
   .p-img.t1 { background:linear-gradient(135deg, var(--indigo-lightest), #f2f2ff); }
   .p-img.t2 { background:linear-gradient(135deg, var(--success-light), #effbf4); }
@@ -207,7 +211,8 @@
   .p-stars svg { color:var(--warning); flex:none; }
   .p-desc { font-size:13px; color:var(--ink-80); flex:1; }
   .p-row { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px; }
-  .p-price { font-weight:700; font-size:14px; color:var(--indigo-dark); line-height:1.25; }
+  .p-price { display:inline-flex; align-items:center; background:var(--indigo-lightest); color:var(--indigo-dark);
+             font-weight:700; font-size:12px; line-height:1.3; padding:6px 12px; border-radius:999px; }
   .add { flex:none; border:none; cursor:pointer; background:var(--indigo); color:#fff; font:600 13px Inter,sans-serif;
          padding:10px 16px; border-radius:999px; transition:background .25s, transform .3s var(--spring); }
   .add:hover { background:var(--indigo-mid); transform:translateY(-2px); }
@@ -408,12 +413,28 @@
               transition:background .25s; }
   .os-close:hover { background:rgba(255,255,255,.28); }
   .os-art { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
-  .os-art .bigmark { font-family:Poppins,sans-serif; font-weight:800; font-size:96px; letter-spacing:-.04em; color:#fff;
-                     text-shadow:0 20px 60px rgba(0,0,0,.45); }
+  /* affirm-style layering: blurred plan card behind a glass product tile with a glowing mark */
+  .os-ghost { position:absolute; top:26px; left:50%; transform:translateX(-50%) rotate(-2deg); width:230px; border-radius:14px;
+              background:rgba(255,255,255,.92); padding:12px 14px; filter:blur(5px); opacity:.55; pointer-events:none; }
+  .os-ghost i { display:block; height:9px; border-radius:5px; background:#c8c8d8; margin-bottom:8px; }
+  .os-ghost i:first-child { width:55%; background:var(--indigo-light); }
+  .os-ghost i:nth-child(2) { width:85%; }
+  .os-ghost i:last-child { width:40%; margin-bottom:0; }
+  .os-tile { position:relative; display:flex; align-items:center; justify-content:center; width:200px; height:150px; margin-top:26px;
+             background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28); border-radius:22px;
+             backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+             box-shadow:0 24px 60px -20px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.25);
+             animation:float 6s ease-in-out infinite; }
+  @media (prefers-reduced-motion:reduce){ .os-tile { animation:none; } }
+  .os-cat { position:absolute; top:-12px; left:14px; background:rgba(255,255,255,.95); color:var(--indigo); font-family:Poppins,sans-serif;
+            font-weight:600; font-size:13px; padding:5px 14px; border-radius:999px; transform:rotate(-3deg);
+            box-shadow:0 6px 18px -8px rgba(0,0,0,.4); }
+  .os-art .bigmark { font-family:Poppins,sans-serif; font-weight:800; font-size:64px; letter-spacing:-.04em; color:#fff;
+                     text-shadow:0 0 38px rgba(168,169,252,.9), 0 14px 40px rgba(0,0,0,.5); }
   .os-art .bigmark i { font-style:normal; color:var(--indigo-light); }
   .os-chiplet { position:absolute; background:rgba(255,255,255,.92); color:var(--indigo-dark); font-weight:700; font-size:12px;
                 padding:7px 14px; border-radius:999px; box-shadow:0 10px 26px -10px rgba(0,0,0,.5); animation:float 6s ease-in-out infinite; }
-  .os-chiplet.a { top:20%; left:9%; --tilt:-6deg; transform:rotate(-6deg); }
+  .os-chiplet.a { top:56%; left:5%; --tilt:-6deg; transform:rotate(-6deg); }
   .os-chiplet.b { bottom:16%; right:8%; --tilt:5deg; transform:rotate(5deg); animation-delay:1s; }
   .os-body { padding:22px 24px 24px; background:linear-gradient(180deg, #0e0e26, #131335); }
   .os-brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14.5px; margin-bottom:14px; }
@@ -660,11 +681,11 @@
           <svg viewBox="0 0 80 80" width="76" height="76" fill="none" aria-hidden="true"><rect x="12" y="24" width="56" height="36" rx="8" fill="#2f2fc1"/><rect x="12" y="32" width="56" height="7" fill="#212189"/><rect x="18" y="46" width="20" height="5" rx="2.5" fill="#a8a9fc"/><circle cx="58" cy="49" r="6" fill="#ffca61"/></svg>
         </div>
         <div class="p-body">
-          <div class="p-cat">Offers &middot; closest to your rails</div>
+          <div class="p-cat">Martech &middot; closest to your rails</div>
           <h3>Co-brand Offers Engine</h3>
           <div class="p-stars">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg>
-            Adtech function built from zero
+            Martech &amp; adtech built from zero
           </div>
           <p class="p-desc">Targeted card offers inside booking, ancillary, and loyalty flows people already trusted.</p>
           <div class="p-row"><span class="p-price">Net-new revenue line</span><button class="add">Add to cart</button></div>
@@ -679,7 +700,7 @@
           <h3>AI Operating Model</h3>
           <div class="p-stars">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg>
-            Live demos at joseplatero.com
+            Demoed at joseplatero.com
           </div>
           <p class="p-desc">Agents draft PRDs, prep executive reporting, and plan capacity. This page came out of it.</p>
           <div class="p-row"><span class="p-price">In daily use, 45+ org</span><button class="add">Add to cart</button></div>
@@ -830,7 +851,7 @@
       </div>
       <div class="brow">
         <span class="btag fit">Direct fit</span>
-        <p><b>Agentic, AI-native product development.</b> Not a familiarity claim. A shipped system. I built and run the operating model where agents draft PRDs and user stories, prep executive reporting, audit initiatives, and plan capacity, in daily use across my team. This page itself came out of that system, and the agents run live at <a href="https://joseplatero.com/" target="_blank" rel="noopener" style="color:var(--indigo); font-weight:600;">joseplatero.com</a>: watch them compile a brief, walk a Jira board, and file a note while you read.</p>
+        <p><b>Agentic, AI-native product development.</b> Not a familiarity claim. A shipped system. I built and run the operating model where agents draft PRDs and user stories, prep executive reporting, audit initiatives, and plan capacity, in daily use across my team. This page itself came out of that system, and <a href="https://joseplatero.com/" target="_blank" rel="noopener" style="color:#fff; font-weight:700; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--indigo-light);">joseplatero.com</a> shows it in motion: demos of a brief compiling, a Jira board walk, and a note landing in a second brain.</p>
       </div>
       <div class="brow">
         <span class="btag fit">Direct fit</span>
@@ -846,7 +867,7 @@
       </div>
       <div class="brow">
         <span class="btag adjacent">Adjacent, not identical</span>
-        <p><b>Commerce monetization, not payments.</b> I put targeted co-brand credit card offers inside booking, ancillary, and loyalty flows: a new revenue line on pages customers were already on, and stood up a net-new adtech function, team and commercial model, from scratch. A real track record monetizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
+        <p><b>Commerce monetization, not payments.</b> I put targeted co-brand credit card offers inside booking, ancillary, and loyalty flows: a new revenue line on pages customers were already on. I built the martech and adtech functions from zero, team and commercial model included, the same way I built out the design practice. A real track record monetizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
       </div>
       <div class="brow">
         <span class="btag gap">Fewer reps</span>
@@ -878,7 +899,7 @@
   <div class="panelD">
     <span class="ptag">Beyond this page</span>
     <h2 class="rv">This page is the catalog. The store is live.</h2>
-    <p class="lead rv">Everything above is a still photo. <b>joseplatero.com is the moving picture:</b> agents compile a morning brief, walk a Jira board, and file a note to a second brain while you read. The keynote game, the origin story, and what people write after the talks are all there too.</p>
+    <p class="lead rv">Everything above is a still photo. <b>joseplatero.com is the moving picture:</b> demos of the operating system at work, a morning brief compiling, a Jira board walk, a note filed to a second brain. The keynote game, the origin story, and what people write after the talks are all there too.</p>
     <a class="pill rv" style="background:#fff; color:var(--indigo-dark); border-color:#fff;" href="https://joseplatero.com/" target="_blank" rel="noopener">Watch the agents work</a>
     <div class="letters rv">
       <figure class="letter">
@@ -981,7 +1002,11 @@
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="os-art" aria-hidden="true">
-        <span class="bigmark" id="osmark">1<i>+</i>1</span>
+        <div class="os-ghost"><i></i><i></i><i></i></div>
+        <div class="os-tile">
+          <span class="os-cat" id="oscat">Design org</span>
+          <span class="bigmark" id="osmark">1<i>+</i>1</span>
+        </div>
         <span class="os-chiplet a">Shopping &amp; Offers</span>
         <span class="os-chiplet b">Only on this page</span>
       </div>
@@ -997,17 +1022,17 @@
         Jose Platero
       </div>
       <div class="os-slides" id="osslides">
-        <div class="os-slide on" data-cta="Order now" data-mark="1&lt;i&gt;+&lt;/i&gt;1">
+        <div class="os-slide on" data-cta="Order now" data-mark="1&lt;i&gt;+&lt;/i&gt;1" data-cat="Design org">
           <span class="os-tag">BOGO</span>
           <h3>Hire one Director, get a working design org included.</h3>
           <p>One hire, two disciplines. The full digital design practice already reports through this role, and it ships.</p>
         </div>
-        <div class="os-slide" data-cta="Claim offer" data-mark="0&lt;i&gt;%&lt;/i&gt;">
+        <div class="os-slide" data-cta="Claim offer" data-mark="0&lt;i&gt;%&lt;/i&gt;" data-cat="Advice">
           <span class="os-tag">0% APR</span>
           <h3>Twenty-five minutes of straight answers. Zero interest required.</h3>
           <p>A walkthrough of your actual Shopping and Offers portfolio: what's working, what isn't, where I'd start. No prep on your side, no deck on mine.</p>
         </div>
-        <div class="os-slide" data-cta="Start the order" data-mark="30&lt;i&gt;d&lt;/i&gt;">
+        <div class="os-slide" data-cta="Start the order" data-mark="30&lt;i&gt;d&lt;/i&gt;" data-cat="Delivery">
           <span class="os-tag">Free delivery</span>
           <h3>First clickable prototype delivered inside 30 days.</h3>
           <p>No listening tour that ends in a readout. Something users can touch, in front of them, in month one.</p>
@@ -1203,6 +1228,7 @@ function osRender(){
   osDots.forEach((d,i)=>d.classList.toggle('on', i===osIdx));
   const s = osSlides[osIdx];
   osMark.innerHTML = s.dataset.mark;
+  document.getElementById('oscat').textContent = s.dataset.cat || 'Offers';
   osCta.textContent = s.dataset.cta;
   osAd.textContent = 'Offer · ' + (osIdx+1) + ' of ' + osSlides.length;
 }

@@ -83,6 +83,10 @@ t('agentic search: agent steps present', (html.match(/class="ags"/g) || []).leng
 t('agentic search: answer cites the record', (html.match(/class="cite"/g) || []).length >= 3);
 t('agentic search: honest gap still disclosed (61%)', /data-n="61"/.test(html));
 t('growth thread: agentic insights chip in flight', /Agentic insights/.test(html));
+t('honest framing: no live-agents overclaim', !/run live at joseplatero|agents run live|while you read/i.test(html));
+t('martech + adtech from zero (with design parallel)', /martech and adtech functions from zero/i.test(html));
+t('joseplatero.com link readable on dark (white underlined)', /joseplatero\.com\/" target="_blank" rel="noopener" style="color:#fff/.test(html));
+t('offer slides carry category pills', (html.match(/data-cat="/g) || []).length === 3 && /id="oscat"/.test(html));
 
 t('six products in the shop', (html.match(/class="prod" data-name/g) || []).length === 6);
 t('every product has an add-to-cart button', (html.match(/class="add">Add to cart/g) || []).length === 6);

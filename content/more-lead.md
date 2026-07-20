@@ -1,1 +1,1 @@
-Everything above is a still photo. <b>joseplatero.com is the moving picture:</b> agents compile a morning brief, walk a Jira board, and file a note to a second brain while you read. The keynote game, the origin story, and what people write after the talks are all there too.
+Everything above is a still photo. <b>joseplatero.com is the moving picture:</b> demos of the operating system at work, a morning brief compiling, a Jira board walk, a note filed to a second brain. The keynote game, the origin story, and what people write after the talks are all there too.

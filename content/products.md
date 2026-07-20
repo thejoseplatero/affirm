@@ -50,11 +50,11 @@
           <svg viewBox="0 0 80 80" width="76" height="76" fill="none" aria-hidden="true"><rect x="12" y="24" width="56" height="36" rx="8" fill="#2f2fc1"/><rect x="12" y="32" width="56" height="7" fill="#212189"/><rect x="18" y="46" width="20" height="5" rx="2.5" fill="#a8a9fc"/><circle cx="58" cy="49" r="6" fill="#ffca61"/></svg>
         </div>
         <div class="p-body">
-          <div class="p-cat">Offers &middot; closest to your rails</div>
+          <div class="p-cat">Martech &middot; closest to your rails</div>
           <h3>Co-brand Offers Engine</h3>
           <div class="p-stars">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg>
-            Adtech function built from zero
+            Martech &amp; adtech built from zero
           </div>
           <p class="p-desc">Targeted card offers inside booking, ancillary, and loyalty flows people already trusted.</p>
           <div class="p-row"><span class="p-price">Net-new revenue line</span><button class="add">Add to cart</button></div>
@@ -69,7 +69,7 @@
           <h3>AI Operating Model</h3>
           <div class="p-stars">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg>
-            Live demos at joseplatero.com
+            Demoed at joseplatero.com
           </div>
           <p class="p-desc">Agents draft PRDs, prep executive reporting, and plan capacity. This page came out of it.</p>
           <div class="p-row"><span class="p-price">In daily use, 45+ org</span><button class="add">Add to cart</button></div>
