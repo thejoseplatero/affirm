@@ -162,6 +162,18 @@
   .ph-visual p { font-size:13px; color:rgba(255,255,255,.82); line-height:1.45; }
   .ph-visual p b { color:#fff; }
   .ph-note { text-align:center; font-size:10.5px; color:rgba(255,255,255,.45); margin-top:12px; }
+  /* hero carousel: the phone narrates the whole pitch in 4 beats */
+  #phplan, #phtotal, #phproduct { transition:opacity .38s ease, transform .38s ease; }
+  #phplan.swap, #phproduct.swap { opacity:0; transform:translateY(5px); }
+  #phtotal.swap { opacity:0; }
+  #phicon svg { display:block; }
+  .ph-dots { display:flex; justify-content:center; gap:6px; margin-top:10px; }
+  .ph-dots i { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.28); transition:background .35s, transform .35s; }
+  .ph-dots i.on { background:var(--indigo-light); transform:scale(1.4); }
+  @media (prefers-reduced-motion:reduce){
+    #phplan, #phtotal, #phproduct { transition:none; }
+    .ph-dots { display:none; }
+  }
   @keyframes float { 0%,100%{ transform:translateY(0) rotate(var(--tilt,0deg)); } 50%{ transform:translateY(-13px) rotate(var(--tilt,0deg)); } }
   @media (max-width:880px){ .showcase::before { display:none; } }
   /* delight: the phone breathes */
@@ -589,29 +601,32 @@
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22 2 12V2h10l8.6 8.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r=".5"/></svg>
           0% ego option
         </span>
-        <div class="ph-plan">
+        <div class="ph-plan" id="phplan">
           <span class="ph-radio"></span>
-          <div><b>1 shipped win</b> <span>every month for 12 months</span></div>
+          <div><b id="phhead">1 shipped win</b> <span id="phsub">every month for 12 months</span></div>
         </div>
-        <div class="ph-rows">
+        <div class="ph-rows" id="phrows">
           <div class="row"><span>Interest</span><b>compounds in your favor</b></div>
           <div class="row"><span>Hidden fees</span><b>$0.00</b></div>
-          <div class="row"><span>Total</span><b>one Director who ships</b></div>
+          <div class="row"><span>Total</span><b id="phtotal">one Director who ships</b></div>
         </div>
-        <div class="ph-product">
-          <span class="cat-pill">Leadership</span>
+        <div class="ph-product" id="phproduct">
+          <span class="cat-pill" id="phcat">Leadership</span>
           <div class="ph-visual">
-            <svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true">
-              <circle cx="22" cy="10" r="6" fill="#fff" opacity=".95"/>
-              <circle cx="9" cy="32" r="5" fill="#a8a9fc"/>
-              <circle cx="22" cy="34" r="5" fill="#a8a9fc"/>
-              <circle cx="35" cy="32" r="5" fill="#a8a9fc"/>
-              <path d="M22 16v6M22 22L9 27M22 22v7M22 22l13 5" stroke="#a8a9fc" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-            <p><b>45+ person org</b> through a manager layer hired and developed for it.</p>
+            <span id="phicon">
+              <svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true">
+                <circle cx="22" cy="10" r="6" fill="#fff" opacity=".95"/>
+                <circle cx="9" cy="32" r="5" fill="#a8a9fc"/>
+                <circle cx="22" cy="34" r="5" fill="#a8a9fc"/>
+                <circle cx="35" cy="32" r="5" fill="#a8a9fc"/>
+                <path d="M22 16v6M22 22L9 27M22 22v7M22 22l13 5" stroke="#a8a9fc" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <p id="phdesc"><b>45+ person org</b> through a manager layer hired and developed for it.</p>
           </div>
         </div>
         <div class="ph-note">For illustrative purposes only. The record is not.</div>
+        <div class="ph-dots" id="phdots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
       </div>
     </div>
   </div>
@@ -850,6 +865,45 @@ function sweep(){ document.querySelectorAll('.rv:not(.in), h1:not(.in)').forEach
 addEventListener('scroll', sweep, {passive:true}); addEventListener('load', sweep); setTimeout(sweep, 350);
 
 addEventListener('scroll', ()=>{ document.getElementById('nav').classList.toggle('scrolled', scrollY > 12); }, {passive:true});
+
+/* hero carousel: phone narrates the whole pitch, one beat at a time */
+const PH_BEATS = [
+  { head:'1 shipped win', sub:'every month for 12 months', total:'one Director who ships', cat:'Leadership',
+    icon:'<svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true"><circle cx="22" cy="10" r="6" fill="#fff" opacity=".95"/><circle cx="9" cy="32" r="5" fill="#a8a9fc"/><circle cx="22" cy="34" r="5" fill="#a8a9fc"/><circle cx="35" cy="32" r="5" fill="#a8a9fc"/><path d="M22 16v6M22 22L9 27M22 22v7M22 22l13 5" stroke="#a8a9fc" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    desc:'<b>45+ person org</b> through a manager layer hired and developed for it.' },
+  { head:'0 decks produced', sub:'the agents write the report instead', total:'an operating model, not a promise', cat:'AI-native',
+    icon:'<svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true"><circle cx="22" cy="15" r="8" fill="#fff" opacity=".95"/><circle cx="10" cy="33" r="6" fill="#a8a9fc"/><circle cx="22" cy="36" r="6" fill="#a8a9fc"/><circle cx="34" cy="33" r="6" fill="#a8a9fc"/><path d="M22 23v6M22 29L10 33M22 29v7M22 29l12 4" stroke="#a8a9fc" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    desc:'<b>Agents draft PRDs</b> and plan capacity, in daily use across my team.' },
+  { head:'1 new revenue line', sub:'built from zero, still compounding', total:'martech + adtech, from zero', cat:'Martech & offers',
+    icon:'<svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true"><rect x="6" y="12" width="32" height="20" rx="4" fill="#a8a9fc" opacity=".85"/><rect x="6" y="17" width="32" height="4" fill="#212189"/><rect x="10" y="26" width="11" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="27" r="3.5" fill="#fff"/></svg>',
+    desc:'<b>Co-brand offers</b> inside booking flows people already trusted.' },
+  { head:'9M+ members', sub:'negotiated for, every quarter', total:'balance, renegotiated weekly', cat:'Marketplace',
+    icon:'<svg viewBox="0 0 44 44" width="44" height="44" fill="none" aria-hidden="true"><circle cx="17" cy="22" r="9" fill="#a8a9fc" opacity=".85"/><circle cx="29" cy="22" r="9" fill="#fff" opacity=".8"/></svg>',
+    desc:'<b>Uber, Starbucks, Marriott, banks</b> compete for the same real estate.' },
+];
+(() => {
+  const phplan = document.getElementById('phplan'), phproduct = document.getElementById('phproduct'), phtotal = document.getElementById('phtotal');
+  const phhead = document.getElementById('phhead'), phsub = document.getElementById('phsub'), phcat = document.getElementById('phcat');
+  const phicon = document.getElementById('phicon'), phdesc = document.getElementById('phdesc');
+  const dots = [...document.querySelectorAll('#phdots i')];
+  const phone = document.querySelector('.phone');
+  if (!phplan || reduced) return;
+  let i = 0, timer = null, paused = false;
+  function render(idx){
+    const b = PH_BEATS[idx];
+    phplan.classList.add('swap'); phproduct.classList.add('swap'); phtotal.classList.add('swap');
+    setTimeout(()=>{
+      phhead.textContent = b.head; phsub.textContent = b.sub; phtotal.textContent = b.total;
+      phcat.textContent = b.cat; phicon.innerHTML = b.icon; phdesc.innerHTML = b.desc;
+      phplan.classList.remove('swap'); phproduct.classList.remove('swap'); phtotal.classList.remove('swap');
+      dots.forEach((d,n)=>d.classList.toggle('on', n===idx));
+    }, 380);
+  }
+  function tick(){ if (paused) return; i = (i+1)%PH_BEATS.length; render(i); }
+  timer = setInterval(tick, 4600);
+  phone.addEventListener('mouseenter', ()=>{ paused = true; });
+  phone.addEventListener('mouseleave', ()=>{ paused = false; });
+})();
 
 /* plan picker */
 const planbar = document.getElementById('planbar');
