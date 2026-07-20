@@ -1,5 +1,2 @@
-<div class="fc-label">Delivery schedule</div>
-        <div class="row"><b>Aeroplan relaunch</b><span class="paid">Shipped</span></div>
-        <div class="row"><b>Homepage rethink</b><span class="paid">Shipped</span></div>
-        <div class="row"><b>Status relaunch, 9M+</b><span class="paid">Shipped</span></div>
-        <div class="row"><b>Shopping &amp; Offers</b><span style="color:var(--indigo); font-weight:700;">Next</span></div>
+<span class="cat-pill">AI-native</span>
+<b>Agents in daily use.</b> Drafting PRDs, reports, and capacity plans across the team. Live at joseplatero.com.
