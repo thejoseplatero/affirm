@@ -88,6 +88,7 @@ t('growth thread: agentic insights chip in flight', /Agentic insights/.test(html
 t('honest framing: no live-agents overclaim', !/run live at joseplatero|agents run live|while you read/i.test(html));
 t('martech + adtech from zero (with design parallel)', /martech and adtech technology function from zero/i.test(html));
 t('no overclaim on owning the commercial model (technology group only)', !/commercial model included/i.test(html));
+t('no overclaim on personally embedding co-brand offers (team runs it)', !/I put targeted co-brand/i.test(html));
 t('joseplatero.com link readable on dark (white underlined)', /joseplatero\.com\/" target="_blank" rel="noopener" style="color:#fff/.test(html));
 t('offer slides carry category pills', (html.match(/data-cat="/g) || []).length === 3 && /id="oscat"/.test(html));
 

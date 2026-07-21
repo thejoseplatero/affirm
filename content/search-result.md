@@ -9,4 +9,4 @@
         <a class="cite" href="#shop">AI Operating Model</a>
         <a class="cite" href="#terms">The disclosed gap</a>
       </div>
-      <div class="agnote"><b>Why the 61% stays on screen:</b> an agent your shoppers can trust explains weak matches instead of burying them. Mine is co-brand credit monetization inside booking flows: adjacent, improving, disclosed. The agent I'd build for your catalog keeps the same promise.</div>
+      <div class="agnote"><b>Why the 61% stays on screen:</b> an agent your shoppers can trust explains weak matches instead of burying them. Mine is co-brand credit optimization inside booking flows, testing and personalization, not the payments stack itself: adjacent, improving, disclosed. The agent I'd build for your catalog keeps the same promise.</div>
