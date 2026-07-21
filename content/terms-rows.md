@@ -20,7 +20,7 @@
       </div>
       <div class="brow">
         <span class="btag adjacent">Adjacent, not identical</span>
-        <p><b>Commerce monetization, not payments.</b> My team runs the testing, personalization, and growth work behind targeted co-brand credit card offers inside booking, ancillary, and loyalty flows, and behind how flights, upsells, and ancillaries convert. We don't run the flights; we optimize the pages that sell them. I stood up the martech and adtech technology function from zero, team and platform, the same way I built out the design practice. The commercial model sits with a separate team; mine is the technology it runs on. A real track record optimizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
+        <p><b>Commerce monetization, not payments.</b> My team drives conversion and revenue growth across booking, upsell, ancillary, and loyalty flows through testing and personalization, including targeted co-brand credit card offers. I stood up the martech and adtech technology function from zero, team and platform, the same way I built out the design practice. The commercial model sits with a separate team; mine is the technology it runs on. A real track record optimizing a page people already trust. Not payments or lending, and I won't pretend otherwise.</p>
       </div>
       <div class="brow">
         <span class="btag gap">Fewer reps</span>
